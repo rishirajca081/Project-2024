@@ -1,0 +1,21 @@
+const express = require("express");
+const app = express();
+
+require('dotenv').config();
+const PORT = process.env.PORT || 4000;
+
+//   cookie-parser - what is this and why we need this ?
+
+// middleware to parse json request body(express.json is middleware here)
+app.use(express.json());
+
+require("./database").connect();
+
+// .... Route import and mount ...
+const user = require("./routes/user");
+app.use("/api/v1", user);
+
+// activate
+app.listen(PORT, () => {
+    console.log(`App is listening at ${PORT}`);
+})
