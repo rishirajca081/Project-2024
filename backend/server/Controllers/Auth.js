@@ -9,7 +9,7 @@ require("dotenv").config();
 exports.signup = async (req, res) => {
     try {
         //get data
-        const { FirstName, LastName, collegeRegno, password, dob, phoneNumber, batchYear, gender } = req.body;
+        const { FirstName, LastName, collegeRegno, password, dob, phoneNumber, batchYear, company, gender } = req.body;
 
         // check if user already exists
         const existingUser = await User.findOne({ collegeRegno });
@@ -33,6 +33,7 @@ exports.signup = async (req, res) => {
             dob,
             phoneNumber,
             batchYear,
+            company,
             gender
         });
 

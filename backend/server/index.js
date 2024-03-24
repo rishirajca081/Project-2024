@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const cors = require('cors');
 require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 
@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 4000;
 
 // middleware to parse json request body(express.json is middleware here)
 app.use(express.json());
-
+app.use(cors());
 require("./database").connect();
 
 // .... Route import and mount ...
