@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  company: {
+    type: String,
+    default: "None"
+  },
   gender: {
     type: String,
     enum: ['male', 'female', 'other'],

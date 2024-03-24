@@ -33,7 +33,7 @@ const Register = () => {
     };
     console.log(userData);
     await axios
-      .post("https://localhost:4000/api/v1/signup", userData)
+      .post("http://localhost:4000/api/v1/signup", userData)
       .then((response) => {
         console.log(response);
       })
