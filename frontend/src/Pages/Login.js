@@ -2,24 +2,31 @@ import React from "react";
 import Logo from "../Images/Logo.jpg";
 import loginimg from "../Images/loginimg.jpg";
 import logimg from "../Images/logimg.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     const userData = {
-      email: data.get("email"),
+      collegeRegno: data.get("regno"),
       password: data.get("password"),
     };
+    console.log(userData);
     await axios
-      .post("https://localhost:4000/api/v1/login", userData)
+      .post("http://localhost:4000/api/v1/login", userData)
       .then((response) => {
         console.log(response);
+        if(response.data.success) {
+          navigate("/ClientHomepage"); // after loggin, redirect to this page
+        }
       })
-      .catch((err) => {https://github.com/Rashi458/Project-2024.git
+      .catch((err) => {
+        console.log("error logging-in: ");
         console.log(err);
       });
   };
@@ -35,20 +42,19 @@ const Login = () => {
           </div>
           <p className="ml-10 mt-6">
             To keep connected with us please login with your personal
-            information by username and password.
+            information by RegistrationNumber and password.
           </p>
           <form onSubmit={handleSubmit}>
             <div className="flex flex-row gap-6 mt-9">
-              <label htmlFor="email" className="text-4xl">
+              <label htmlFor="regno" className="text-4xl">
                 <i class="zmdi zmdi-account"></i>
               </label>
               <input
-                type="email"
-                name="email"
-                id="email"
+                type="text"
+                name="regno"
+                id="regno"
                 autoComplete="off"
-                placeholder="USERNAME"
-                // value={email} onChange={(e)=>setEmail(e.target.value)}
+                placeholder="RegistrationNumber"
                 required
                 className="text-black border rounded-xl border-b border-gray-500 shadow-md outline-none  focus:outline-none items-center
                 justify-center w-[80%] h-14 placeholder-black text-black font-bold pl-4 ml-6 "
