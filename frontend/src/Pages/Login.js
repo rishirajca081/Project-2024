@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../Images/Logo.jpg";
 import loginimg from "../Images/loginimg.jpg";
 import logimg from "../Images/logimg.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+
+  const [token, setToken_] = useState(localStorage.getItem("user-jwt-token"));
+  const [userid, setUserId_] = useState(localStorage.getItem("userid"))
+
+  const setToken = (tkn) => {
+    localStorage.setItem("user-jwt-token", tkn);
+    setToken_(token);
+  }
+  const setUserId = (usrid) => {
+    localStorage.setItem("userid", usrid);
+    setUserId_(usrid);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +33,8 @@ const Login = () => {
       .then((response) => {
         console.log(response);
         if(response.data.success) {
+          setUserId(response.data.user._id)
+          setToken(response.data.token)
           navigate("/ClientHomepage"); // after loggin, redirect to this page
         }
       })
