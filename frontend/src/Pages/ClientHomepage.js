@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import Logo from "../Images/Logo.jpg";
 import ChatIcon from "../Images/ChatIcon.jpeg"; 
 import UserProfileLogo from "../Images/UserProfileLogo.png";
+import { useNavigate, NavLink } from "react-router-dom";
 
 function ClientHomepage() {
+
+  const navigate = useNavigate() ;
+
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
@@ -40,7 +44,8 @@ function ClientHomepage() {
             <img src={ChatIcon} alt="Chat Icon" className="h-10" />
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">Chat</button>
             <img src={UserProfileLogo} alt="User Profile Logo" className="h-10" />
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">Profile</button>
+            <button className="bg-blue-500 hover:bg-blue-600
+             text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate("/dashboard")}>Profile</button>
           </div>
         </div>
       </header>
