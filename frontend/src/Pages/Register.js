@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
+
 import Logo from "../Images/Logo.jpg";
 import RegisterSide from "../Images/RegisterSide.jpg";
-import { NavLink } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate();
+  
   const [batchYear, setBatchYear] = useState("");
   const [company, setCompany] = useState("");
   const currentYear = new Date().getFullYear();
@@ -36,6 +39,11 @@ const Register = () => {
       .post("http://localhost:4000/api/v1/signup", userData)
       .then((response) => {
         console.log(response);
+        if(response.data.success === true) {
+          console.log("created user successfully!");
+          alert("Registration successfull!\nLogin to proceed!")
+          navigate("/login");
+        } 
       })
       .catch((err) => {
         console.log(err);
@@ -201,6 +209,15 @@ const Register = () => {
           <p className="mt-2 ml-4 mb-4">future</p>
         </div>
       </section>
+        <p className="mt-4 text-center text-gray-600">
+        Already have an account? 
+        <NavLink 
+          to="/login" 
+          className="text-blue-500 hover:text-blue-700 ml-2 underline"
+        >
+          Login
+        </NavLink>
+      </p>
     </div>
   );
 };
