@@ -9,7 +9,7 @@ import Dashboard from './Pages/Dashboard';
 import Home from './Pages/Home';
 import UserProfile from './Pages/UserProfile';
 import Profile from './Pages/Profile';
-import Layout from './Component/Shared/Layout';  //HOME
+import Layout from './Component/Shared/Layout';  // HOME
 
 const App = () => {
   return (
