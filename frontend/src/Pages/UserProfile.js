@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { MdOutlineDashboard } from "react-icons/md";
-import { RiSettings4Line } from "react-icons/ri";
-import { TbReportAnalytics } from "react-icons/tb";
-import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
-import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { MdDashboard } from "react-icons/md";
+import { RiUserLine, RiSettings4Line } from "react-icons/ri";
+import { BsPencilSquare } from "react-icons/bs";
+import { TiLockClosedOutline } from "react-icons/ti";
+import { Link, Routes, Route } from "react-router-dom";
+import Profile from "./Profile";
+import EditProfile from "./EditProfile";
 
 const UserProfile = () => {
   const menus = [
-    { name: "dashboard", link: "/", icon: MdOutlineDashboard },
-    { name: "user", link: "/", icon: AiOutlineUser },
-    { name: "messages", link: "/", icon: FiMessageSquare },
-    { name: "analytics", link: "/", icon: TbReportAnalytics, margin: true },
-    { name: "File Manager", link: "/", icon: FiFolder },
-    { name: "Cart", link: "/", icon: FiShoppingCart },
-    { name: "Saved", link: "/", icon: AiOutlineHeart, margin: true },
-    { name: "Setting", link: "/", icon: RiSettings4Line },
+    { name: "Dashboard", link: "/", icon: MdDashboard },
+    { name: "Profile", link: "/Profile", icon: RiUserLine },
+    { name: "Edit Profile", link: "/EditProfile", icon: BsPencilSquare },
+    { name: "Change Password", link: "/change-password", icon: TiLockClosedOutline, margin: true },
+    { name: "Settings", link: "/settings", icon: RiSettings4Line },
   ];
   const [open, setOpen] = useState(true);
+
   return (
     <section className="flex gap-6">
       <div
@@ -40,7 +39,7 @@ const UserProfile = () => {
               key={i}
               className={` ${
                 menu?.margin && "mt-5"
-              } group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}
+              } group flex items-center text-sm gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}
             >
               <div>{React.createElement(menu?.icon, { size: "20" })}</div>
               <h2
@@ -65,11 +64,13 @@ const UserProfile = () => {
         </div>
       </div>
       <div className="m-3 text-xl text-gray-900 font-semibold">
-        REACT TAILWIND
+        <Routes>
+          <Route path="/UserProfile" element={<Profile />} />
+          <Route path="/EditProfile" element={<EditProfile />} />
+        </Routes>
       </div>
     </section>
   );
 };
 
 export default UserProfile;
-;

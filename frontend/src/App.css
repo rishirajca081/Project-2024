@@ -1,0 +1,43 @@
+/* responsive.css */
+:disabled{
+  background: #8f8e8e2c;
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .md-flex-row {
+      flex-direction: row;
+    }
+  
+    .md-ml-20 {
+      margin-left: 20px;
+    }
+  
+    /* Add more styles as needed */
+  }
+  
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    .lg-flex-row {
+      flex-direction: row;
+    }
+  
+    .lg-ml-20 {
+      margin-left: 20px;
+    }
+  
+    /* Add more styles as needed */
+  }
+  
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    .xl-flex-row {
+      flex-direction: row;
+    }
+  
+    .xl-ml-20 {
+      margin-left: 20px;
+    }
+  
+    /* Add more styles as needed */
+  }
+  
