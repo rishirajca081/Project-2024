@@ -1,13 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Logo from "../Images/Logo.jpg";
 import ChatIcon from "../Images/ChatIcon.jpeg"; 
 import UserProfileLogo from "../Images/UserProfileLogo.png";
 import { useNavigate, NavLink } from "react-router-dom";
 
+import axios from 'axios';
+const Profile=({FirstName,LastName,batchYear,company,gender})=>(
+  <section className="container mx-auto mt-8">
+  <div className="bg-white shadow-md rounded-md p-4 flex items-center">
+    <img src={UserProfileLogo} alt="User Profile" className="h-16 w-16 rounded-full" />
+    <div className="ml-4">
+      <h2 className="text-lg font-semibold">{FirstName} {LastName}</h2>
+      <p className="text-gray-600">Batch:{batchYear} </p>
+      <p className="text-gray-600">Company: {company}</p>
+      <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">View Details</button>
+    </div>
+  </div>
+</section>
+);
+
 function ClientHomepage() {
-
+  const [profile,setProfile]=useState([]);
+  
+  useEffect(()=>{
+    fetchData();
+ },[]);
+  const fetchData=async()=>{
+          await axios.get("http://localhost:4000/api/v1/users")
+            .then((res)=>{
+              setProfile(res.data);
+            }).catch((error)=>{
+               console.log(error);
+            });
+            
+  }
   const navigate = useNavigate() ;
-
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
@@ -33,6 +60,7 @@ function ClientHomepage() {
   };
 
   return (
+    
     <div className="bg-gray-100 min-h-screen">
       {/* Header Section */}
       <header className="bg-white shadow-lg">
@@ -81,7 +109,7 @@ function ClientHomepage() {
       </section>
 
       {/* User Profile Box */}
-      <section className="container mx-auto mt-8">
+      {/* <section className="container mx-auto mt-8">
         <div className="bg-white shadow-md rounded-md p-4 flex items-center">
           <img src={UserProfileLogo} alt="User Profile" className="h-16 w-16 rounded-full" />
           <div className="ml-4">
@@ -91,8 +119,12 @@ function ClientHomepage() {
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">View Details</button>
           </div>
         </div>
-      </section>
-      
+      </section> */}
+    <div>
+      {profile.map((item,idx)=>(
+           <Profile key={idx} {...item}/>
+      ))}
+    </div>
     </div>
   );
 }
