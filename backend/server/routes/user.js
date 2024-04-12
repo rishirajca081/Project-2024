@@ -1,12 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const {login, signup} = require("../Controllers/Auth");
+const {login, signup,logout, sendOTP, verifyOTP} = require("../Controllers/Auth");
 const userp = require("../Controllers/userp");
 
 
 router.post("/login", login);
-router.post("/signup", signup);
+router.post("/signup", sendOTP);
+router.post('/verify-otp', verifyOTP);
+router.post('/user-account', signup)
+// GET route for user logout
+router.get('/logout',logout);
+
 
 
 // Route to get user profile
