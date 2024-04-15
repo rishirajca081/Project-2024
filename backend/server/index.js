@@ -4,11 +4,15 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
+
 const PORT = process.env.PORT || 4000;
 
-//   cookie-parser - what is this and why we need this ?
+//   cookie-parser - to parse cookie sent via body 
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
-// middleware to parse json request body(express.json is middleware here)
+
+// middleware to parse json request body (express.json is middleware here)
 app.use(express.json());
 app.use(cors());
 require("./database").connect();

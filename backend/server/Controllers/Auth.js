@@ -10,7 +10,7 @@ const { options } = require("../routes/user");
 require("dotenv").config();
 
 
-//sendOTP
+// SendOTP
 exports.sendOTP = async (req, res) =>  {
 
     try {
@@ -29,7 +29,7 @@ exports.sendOTP = async (req, res) =>  {
         }
 
 
-        //generate otp
+        // generate otp
         var otp = otpGenerator.generate(6, {
             upperCaseAlphabets:false,
             lowerCaseAlphabets:false,
@@ -37,7 +37,7 @@ exports.sendOTP = async (req, res) =>  {
         });
         console.log("OTP generated: ", otp );
 
-        //check unique otp or not
+        // check unique otp or not
         let result = await OTP.findOne({otp: otp});
 
         while(result) {
@@ -52,11 +52,12 @@ exports.sendOTP = async (req, res) =>  {
         const otpPayload = {email, otp};
 
 
-        //create an entry for OTP
+        // Create an entry for OTP
         const otpBody = await OTP.create(otpPayload);
         console.log(otpBody);
 
-        //return response successful
+
+        // return response successful
         res.status(200).json({
             success:true,
             message:'OTP Sent Successfully',
@@ -75,12 +76,13 @@ exports.sendOTP = async (req, res) =>  {
 
 };
 
+ // Verify  Otp
 exports.verifyOTP = async (req, res) =>  {
 
     try {
         //fetch email from request ki body
-        const {email, otp} = req.body;
-        console.log(otp)
+        const {email,otp} = req.body;
+        console.log(otp);
         //check if user already exist
         const checkUserPresent = await User.findOne({email});
 
@@ -92,7 +94,7 @@ exports.verifyOTP = async (req, res) =>  {
             })
         }
 
-        const getStoredOTP = await otpDB.findOne({email})
+        const getStoredOTP = await otpDB.findOne({email});
         console.log(getStoredOTP);
         if(otp === getStoredOTP.otp){
             return res.status(200).json({
@@ -110,12 +112,13 @@ exports.verifyOTP = async (req, res) =>  {
     }
 };
 
-//signup
+
+// Signup
 exports.signup = async (req, res) => {
     try {
         //get data
-        const { FirstName, LastName, collegeRegno, password, dob, phoneNumber, batchYear, company, gender,email } = req.body;
-
+        const { FirstName, LastName, collegeRegno, password, dob, phoneNumber, batchYear, company, gender} = req.body;
+        
         // check if user already exists
         const existingUser = await User.findOne({ email });
 
@@ -155,6 +158,7 @@ exports.signup = async (req, res) => {
         });
     }
 }
+
 
 //login
 exports.login = async (req,res) => {
@@ -206,6 +210,7 @@ exports.login = async (req,res) => {
             }
 
             //create cookies
+            // save user data token in cookies
             res.cookie("babbarCookie", token, options).status(200).json({
                 success:true,
                 token,
