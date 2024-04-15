@@ -35,7 +35,7 @@ const Login = () => {
         if(response.data.success) {
           setUserId(response.data.user._id)
           setToken(response.data.token)
-          navigate("/ClientHomepage"); // after loggin, redirect to this page
+          navigate("/ClientHomepage",{state:{profile:response.data.user}}); // after loggin, redirect to this page
         }
       })
       .catch((err) => {

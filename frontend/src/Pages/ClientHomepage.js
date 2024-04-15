@@ -3,7 +3,7 @@ import Logo from "../Images/Logo.jpg";
 import ChatIcon from "../Images/ChatIcon.jpeg"; 
 import UserProfileLogo from "../Images/UserProfileLogo.png";
 import { useNavigate, NavLink } from "react-router-dom";
-
+import {useLocation}  from 'react-router-dom'
 import axios from 'axios';
 const Profile=({FirstName,LastName,batchYear,company,gender})=>(
   <section className="container mx-auto mt-8">
@@ -20,6 +20,9 @@ const Profile=({FirstName,LastName,batchYear,company,gender})=>(
 );
 
 function ClientHomepage() {
+    const location =useLocation();
+     const {state}=location;
+    console.log(state);
   const [profile,setProfile]=useState([]);
   
   useEffect(()=>{
@@ -73,7 +76,7 @@ function ClientHomepage() {
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">Chat</button>
             <img src={UserProfileLogo} alt="User Profile Logo" className="h-10" />
             <button className="bg-blue-500 hover:bg-blue-600
-             text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate("/dashboard")}>Profile</button>
+             text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate("/dashboard",{state:{val:state}})}>Profile</button>
           </div>
         </div>
       </header>
