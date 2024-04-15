@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import User from '../Images/User.png';
 import profilebg from '../Images/profilebg.jpg';
 import '../App.css'
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
-
+import {useLocation} from 'react-router-dom';
 export default function EditProfile() {
+
+  // const location =useLocation();
+  // const {state}=location;
+  // // console.log(state.val.profile);
+  // const userData=state.val.profile;
+  // console.log(userData);
 
   const [UserData, setUserData] = useState({
     FirstName: "John",
