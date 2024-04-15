@@ -7,7 +7,21 @@ module.exports = {
         bgDark: "#22223b",
         bgDark2: "#4a4e69",
       },
+      fontFamily: {
+        Montserrat: "Montserrat",
+      },
+
     },
+    // screens: {
+    //   'tablet': '640px',
+    //   // => @media (min-width: 640px) { ... }
+
+    //   'laptop': '1024px',
+    //   // => @media (min-width: 1024px) { ... }
+
+    //   'desktop': '1280px',
+    //   // => @media (min-width: 1280px) { ... }
+    // },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };
