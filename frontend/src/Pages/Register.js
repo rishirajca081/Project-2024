@@ -36,7 +36,7 @@ const Register = () => {
     };
     console.log(userData);
     await axios
-      .post("http://localhost:4000/api/v1/signup", userData)
+      .post("http://localhost:4000/api/v1/user-account", userData)
       .then((response) => {
         console.log(response);
         if(response.data.success === true) {

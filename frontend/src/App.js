@@ -43,7 +43,6 @@ const App = () => {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Otppg" element={<Otppg />} />
           <Route path="/VerifyOtp" element={<VerifyOtp />} />
-          <Route path="/VerifyOtp" element={<VerifyOtp />} />
         </Routes>
       </BrowserRouter>
     </div>

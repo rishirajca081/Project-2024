@@ -4,7 +4,7 @@ const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const otpDB = require('../models/OTP');
+// const otpDB = require('../models/OTP');
 
 const { options } = require("../routes/user");
 require("dotenv").config();
@@ -12,7 +12,7 @@ require("dotenv").config();
 
 // SendOTP
 exports.sendOTP = async (req, res) =>  {
-
+    console.log(req.body);
     try {
         //fetch email from request ki body
         const {email} = req.body;
@@ -53,6 +53,8 @@ exports.sendOTP = async (req, res) =>  {
 
 
         // Create an entry for OTP
+        // const newotp = new OTP(otpPayload);
+        // await newotp.save();
         const otpBody = await OTP.create(otpPayload);
         console.log(otpBody);
 
@@ -68,7 +70,7 @@ exports.sendOTP = async (req, res) =>  {
         console.log(error);
         return res.status(500).json({
             success:false,
-            message:error.message,
+            message:"in catch of backend",
         })
 
     }
