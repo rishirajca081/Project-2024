@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     const userData = {
-      collegeRegno: data.get("regno"),
+      email: data.get("email"),
       password: data.get("password"),
     };
     console.log(userData);
@@ -64,10 +64,10 @@ const Login = () => {
               </label>
               <input
                 type="text"
-                name="regno"
-                id="regno"
+                name="email"
+                id="email"
                 autoComplete="off"
-                placeholder="RegistrationNumber"
+                placeholder="email"
                 required
                 className="text-black border rounded-xl border-b border-gray-500 shadow-md outline-none  focus:outline-none items-center
                 justify-center w-[80%] h-14 placeholder-black text-black font-bold pl-4 ml-6 "

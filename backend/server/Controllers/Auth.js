@@ -145,7 +145,8 @@ exports.signup = async (req, res) => {
             phoneNumber,
             batchYear,
             company,
-            gender
+            gender,
+            email
              //ye enail HATEGA KYAAAA
         });
 
