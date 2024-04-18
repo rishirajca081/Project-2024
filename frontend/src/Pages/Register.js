@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink,useLocation } from "react-router-dom";
 
 import Logo from "../Images/Logo.jpg";
 import RegisterSide from "../Images/RegisterSide.jpg";
 import axios from "axios";
 
-const Register = () => {
+const Register = ({}) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { email } = location.state || {};
+
   
   const [batchYear, setBatchYear] = useState("");
   const [company, setCompany] = useState("");
   const currentYear = new Date().getFullYear();
+  
+  //const [userEmail, setuserEmail] = useState(email);
 
+  //setuserEmail(email);
   const handleBatchYearChange = (e) => {
     setBatchYear(e.target.value);
     // If current year is filled, disable company field
@@ -19,6 +25,7 @@ const Register = () => {
       setCompany("");
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +40,7 @@ const Register = () => {
       company: data.get("company"),
       password: data.get("password"),
       gender: data.get("gender"),
+      email: data.get("email"),
     };
     console.log(userData);
     await axios
@@ -187,6 +195,35 @@ const Register = () => {
                 <option value="other">Other</option>
               </select>
             </div>
+            {/* <div className="mb-4">
+                <label htmlFor="email" className="block">
+                  email:
+                </label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange
+                  required
+                  className="border border-black rounded-md focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-3 "
+                />
+              </div> */}
+              <div className="mb-4">
+                <label htmlFor="email" className="block ">
+                  email
+                </label>
+                <input
+                 type="text"
+                  id="email"
+                  name="email"
+                  defaultValue={email || ''}
+                  readOnly
+                  required
+                 className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2"
+                />
+
+              </div>
 
             <button
               type="submit"

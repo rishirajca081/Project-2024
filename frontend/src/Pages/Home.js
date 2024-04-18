@@ -4,6 +4,7 @@ import { CCard, CCardBody, CCardTitle, CCardText,CCol ,CRow,CardImg,Card ,CardIm
   ,CCardImage,CCardFooter} from '@coreui/react';
   import '../App.css';
 import Footer from './Footer';
+import Navbar from '../Component/Shared/Navbar'
 import about from '../Images/about.jpg';
 import vision from '../Images/vision.webp'
 import gallery from '../Images/gallery.jpg'
@@ -16,6 +17,8 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   
   return (
+    <>
+    <Navbar/>
     <div className='bg-white'>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-6">
   <div className="flex flex-col space-y-6 ml-20">
@@ -120,7 +123,7 @@ We are proud of our alumni's accomplishments and are committed to helping
 
         </div>
       <Footer/>
-    </div>
+    </div></>
   );
 }
 
