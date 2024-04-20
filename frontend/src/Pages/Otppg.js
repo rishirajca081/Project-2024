@@ -140,6 +140,17 @@ const Otppg = () => {
         </div>
         <img src={codeimg} alt="Logo" className="w-full md:w-[50%] h-full" />
       </section>
+      
+       {/* Login Link */}
+       <p className="mt-4 text-center text-gray-600">
+            Already have an account?{' '}
+            <NavLink
+              to="/login"
+              className="text-blue-500 hover:text-blue-700 ml-2 underline"
+            >
+              Login
+            </NavLink>
+          </p>
     </div>
   );
 };
