@@ -126,6 +126,16 @@ const Otppg = () => {
             )}
             <div className="SignIn-link pt-4 ml-[12.5rem] md:ml-6 mt-6 flex gap-2">
             </div>
+
+            <p className="mt-4 text-center text-gray-600">
+        Already have an account? 
+        <NavLink 
+          to="/login" 
+          className="text-blue-500 hover:text-blue-700 ml-2 underline"
+        >
+          Login
+        </NavLink>
+      </p> 
             {/* Submit Button */}
             <NavLink className="button-link">
               <button
@@ -141,6 +151,7 @@ const Otppg = () => {
         <img src={codeimg} alt="Logo" className="w-full md:w-[50%] h-full" />
       </section>
     </div>
+           
   );
 };
 
