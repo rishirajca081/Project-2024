@@ -1,19 +1,34 @@
 import React from 'react';
 import EditProfile from './EditProfile';
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import User from '../Images/User.png';
 import profilebg from '../Images/profilebg.jpg'
 import newuser from '../Images/newuser.jpg'
 import '../App.css'
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
-import {useLocation} from 'react-router-dom';
+import {useLocation,useParams} from 'react-router-dom';
+import axios from 'axios';
 export default function Dashboard() {
   // Dummy user data
-    const location =useLocation();
-  const {state}=location;
-  // console.log(state.val.profile);
-  const userData=state.val.profile;
-  console.log(userData);
+  //   const location =useLocation();
+  // const {state}=location;
+  // // console.log('in dash ',state);
+  // const userData=state?.val?.profile;
+
+
+  const {userid} = useParams()
+  const [userData,setUserData]= useState([]);
+
+
+  useEffect(()=>{
+      axios.get(`http://localhost:4000/api/v1//user/${userid}`).then((res)=>{
+          console.log("response ",res.data);
+          setUserData(res.data);
+      }).catch((err)=>{
+        console.log("error in dahboard",err.message);
+      })
+  },[userid])
+  // console.log(userData);
   // const [userData, setUserData] = useState({
   //   name: "John Doe",
   //   email: "john.doe@example.com",
@@ -53,7 +68,7 @@ export default function Dashboard() {
           <div className='flex flex-col gap-0 w-[100px]'>
             <p className='font-bold '>Name</p>
             <input type="text" name='name' id='name' autoComplete='off' placeholder='Your Name'
-              value={`${userData.FirstName} ${userData.LastName}`} readOnly
+              value={`${userData?.FirstName} ${userData?.LastName}`} readOnly
               className='border border-black rounded-md p-2 focus:outline-none 
             focus:border-black-500 w-[400px] h-[40px] mt-2 ' />
           </div>
@@ -65,7 +80,7 @@ export default function Dashboard() {
           <div className='flex flex-col gap-0 w-[100px]'>
             <p className='font-bold'>Email</p>
             <input type="email" name='email' id='email' autoComplete='off' placeholder='Your Email'
-              value={userData.email} readOnly
+              value={userData?.email} readOnly
               className='border border-black rounded-md p-2 
             focus:outline-none focus:border-black-500 w-[400px] h-[40px] mt-2' />
           </div>
@@ -77,7 +92,7 @@ export default function Dashboard() {
           <div className='flex flex-col gap-0 w-[100px]'>
             <p className='font-bold'>Reg no.</p>
             <input type="text" name='regNo' id='regNo' autoComplete='off' placeholder='Registration Number'
-              value={userData.collegeRegno} readOnly
+              value={userData?.collegeRegno} readOnly
               className='border border-black rounded-md p-2 
             focus:outline-none focus:border-black-500 w-[400px] h-[40px] mt-2' />
           </div>
@@ -89,7 +104,7 @@ export default function Dashboard() {
           <div className='flex flex-col gap-0 w-[200px]'>
             <p className='font-bold'>Current Company</p>
             <input type="text" name='currentCompany' id='currentCompany' autoComplete='off' placeholder='Current Company'
-              value={userData.company} readOnly
+              value={userData?.company} readOnly
               className='border border-black rounded-md p-2 
             focus:outline-none focus:border-black-500 w-[400px] h-[40px] mt-2' />
           </div>
@@ -101,7 +116,7 @@ export default function Dashboard() {
           <div className='flex flex-col gap-0 w-[100px]'>
             <p className='font-bold'>Batch Year</p>
             <input type="text" name='batchYear' id='batchYear' autoComplete='off' placeholder='Batch Year'
-              value={userData.batchYear} readOnly
+              value={userData?.batchYear} readOnly
               className='border border-black rounded-md p-2 
             focus:outline-none focus:border-black-500 w-[400px] h-[40px] mt-2' />
           </div>
@@ -113,7 +128,7 @@ export default function Dashboard() {
           <div className='flex flex-col gap-0 w-[100px]'>
             <p className='font-bold'>Phone No.</p>
             <input type="text" name='phoneNo' id='phoneNo' autoComplete='off' placeholder='Phone Number'
-              value={userData.phoneNumber} readOnly
+              value={userData?.phoneNumber} readOnly
               className='border border-black rounded-md p-2 
             focus:outline-none focus:border-black-500 w-[400px] h-[40px] mt-2' />
           </div>
@@ -125,7 +140,7 @@ export default function Dashboard() {
           <div className='flex flex-col gap-0 w-[100px]'>
             <p className='font-bold'>Gender</p>
             <input type="text" name='gender' id='gender' autoComplete='off' placeholder='Gender'
-              value={userData.gender} readOnly
+              value={userData?.gender} readOnly
               className='border border-black rounded-md p-2 
             focus:outline-none focus:border-black-500 w-[400px] h-[40px] mt-2' />
           </div>
@@ -137,7 +152,7 @@ export default function Dashboard() {
           <div className='flex flex-col gap-0 w-[100px]'>
             <p className='font-bold'>DOB</p>
             <input type="text" name='dob' id='dob' autoComplete='off' placeholder='Date of Birth'
-              value={userData.dob} readOnly
+              value={userData?.dob} readOnly
               className='border border-black rounded-md p-2 
 focus:outline-none focus:border-black-500 w-[400px] h-[40px] mt-2' />
           </div>

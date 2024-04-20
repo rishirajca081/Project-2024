@@ -22,7 +22,7 @@ const Profile=({FirstName,LastName,batchYear,company,gender})=>(
 function ClientHomepage() {
     const location =useLocation();
      const {state}=location;
-    console.log(state);
+    console.log("abc ",state);
   const [profile,setProfile]=useState([]);
   
   useEffect(()=>{
@@ -76,7 +76,7 @@ function ClientHomepage() {
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">Chat</button>
             <img src={UserProfileLogo} alt="User Profile Logo" className="h-10" />
             <button className="bg-blue-500 hover:bg-blue-600
-             text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate("/dashboard",{state:{val:state}})}>Profile</button>
+             text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate(`/dashboard/${state?.profile?._id}`)}>Profile</button>
           </div>
         </div>
       </header>

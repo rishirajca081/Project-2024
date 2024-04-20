@@ -3,6 +3,7 @@ import Logo from '../Images/Logo.jpg';
 import codeimg from '../Images/codeimg.jpg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useToast } from '@chakra-ui/react';
 
 const Otppg = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const Otppg = () => {
   const [otp, setOtp] = useState('');
   const [otpSentStatus, setOtpSentStatus] = useState(false);
 
+  const toast=useToast();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -18,8 +21,23 @@ const Otppg = () => {
       const response = await axios.post('http://localhost:4000/api/v1/signup', { email });
       console.log(response.data);
       if (response.status === 200) {
+        toast({
+          title: "OTP Sent Successfully",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top-left",
+        });
         setOtpSentStatus(true);
       } else {
+        
+        toast({
+          title: "Error",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top-left",
+        });
         console.log(response.status);
       }
     }
@@ -29,8 +47,23 @@ const Otppg = () => {
         const response = await axios.post('http://localhost:4000/api/v1/verify-otp', { email, otp });
         console.log(response.data);
         if (response.status === 200) {
+          toast({
+            title: "Verified",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+            position: "top-left",
+          });
+       
           navigate('/register',{state: {email}})
         } else {
+          toast({
+            title: "Wrong OTP",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "top-left",
+          });
           console.log(response.status);
         }
       }

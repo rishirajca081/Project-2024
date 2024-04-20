@@ -11,11 +11,17 @@ import {
 } from 'react-icons/hi'
 
 export const DASHBOARD_SIDEBAR_LINKS = [
+	// {
+	// 	key: 'dashboard',
+	// 	label: 'Dashboard',
+	// 	path: '/dashboard',
+	// 	icon: <HiOutlineViewGrid />
+	// },
 	{
-		key: 'dashboard',
-		label: 'Dashboard',
-		path: '/dashboard',
-		icon: <HiOutlineViewGrid />
+		key: 'user',
+		label: 'User',
+		path: '/user',
+		icon: <HiUser />
 	},
 	{
 		key: 'EditProfile',

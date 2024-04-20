@@ -31,7 +31,7 @@ const Login = () => {
     await axios
       .post("http://localhost:4000/api/v1/login", userData)
       .then((response) => {
-        console.log(response);
+        console.log('response in login >> ',response);
         if(response.data.success) {
           setUserId(response.data.user._id)
           setToken(response.data.token)
