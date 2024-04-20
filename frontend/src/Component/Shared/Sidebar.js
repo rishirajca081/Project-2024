@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import Logo from '../../Images/Logo.jpg';
 import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '../../lib/Constants/navigation';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames'
 import { HiOutlineLogout } from 'react-icons/hi'
+
 
 const linkClass =
     'flex items-center gap-2 font-light px-3 py-2 hover:bg-neutral-100 hover:no-underline active:bg-indigo-300 rounded-sm text-base'
 
 export default function Sidebar({userid}) {
     const [showModal, setShowModal] = useState(false);
+    const history=useNavigate();
 
     const handleLogout = () => {
         // Show confirmation modal
+
         setShowModal(true);
     };
 
@@ -20,6 +23,9 @@ export default function Sidebar({userid}) {
         // Perform logout action
         // For now, let's just navigate to the login page
         // performLogout();
+        // localStorage.remove();
+        localStorage.removeItem("userInfo");
+        history('/home');
         setShowModal(false);
     };
 
