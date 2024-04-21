@@ -16,6 +16,7 @@ import Gallery from './Pages/Gallery';
 import About from './Pages/About';
 import Otppg from './Pages/Otppg';
 import VerifyOtp from './Pages/VerifyOtp';
+import Vision from './Pages/Vision'
 
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Otppg" element={<Otppg />} />
           <Route path="/VerifyOtp" element={<VerifyOtp />} />
+          <Route path="/Vision" element={<Vision />} />
         </Routes>
       </BrowserRouter>
     </div>
