@@ -19,33 +19,17 @@ export default function EditProfile() {
         console.log("error in dahboard",err.message);
       })
   },[userid])
-  // const location =useLocation();
-  // const {state}=location;
-  // // console.log(state.val.profile);
-  // const userData=state.val.profile;
-  // console.log(userData);
-
-  // const [UserData, setUserData] = useState({
-  //   FirstName: "John",
-  //   LastName: "John",
-  //   email: "john.doe@example.com",
-  //   collegeRegNo: "123456",
-  //   company: "ABC Corp",
-  //   batchYear: "2018",
-  //   phoneNumber: "1234567890",
-  //   gender: "Male",
-  //   dob: "1990-01-01",
-  //   // Add other fields as needed
-  // });
-
 
   const handleUpdate = () => {
-   const newUserData = {
-      ...UserData
-    };
-    setUserData(newUserData);
-    
-    // yaha pr api call se newuserdata ko data ko database me store !!
+      axios.put(`http://localhost:4000/api/v1/user/${userid}`, UserData)
+      .then((res) => {
+        console.log("Update successful");
+        console.log(res.data);
+        setUserData(res.data);
+      })
+      .catch((err) => {
+        console.error("Update failed", err.message);
+      });
   };
 
   return (
