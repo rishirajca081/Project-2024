@@ -1,16 +1,15 @@
 import React from "react";
-import Logo from "../../img/logo.png";
-import './LogoSearch.css'
-import { UilSearch } from '@iconscout/react-unicons'
+import { UilSearch } from '@iconscout/react-unicons';
+
 const LogoSearch = () => {
   return (
-    <div className="LogoSearch">
+    <div className="LogoSearch flex gap-3 p-4 bg-white">
       {/* <img src={Logo} alt="" /> */}
-      <div className="Search">
-          <input type="text" placeholder="#Explore"/>
-          <div className="s-icon">
-                <UilSearch/>
-          </div>
+      <div className="Search flex bg-gray-200 rounded-full px-4 py-2 items-center">
+        <input type="text" placeholder="#Explore" className="bg-transparent outline-none ml-2" />
+        <div className="s-icon ml-2 flex items-center justify-center bg-gradient-to-br from-yellow-400 to-red-500 rounded px-2 text-white">
+          <UilSearch size="20" />
+        </div>
       </div>
     </div>
   );

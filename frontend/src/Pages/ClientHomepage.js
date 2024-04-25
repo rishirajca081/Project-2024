@@ -123,7 +123,7 @@ function ClientHomepage() {
           </div>
         </div>
       </section> */}
-    <div>
+    <div className='w-[400px] h-[700px]'>
       {profile.map((item,idx)=>(
            <Profile key={idx} {...item}/>
       ))}
