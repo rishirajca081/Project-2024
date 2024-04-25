@@ -1,43 +1,32 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from "../Images/Logo.jpg";
-import ChatIcon from "../Images/ChatIcon.jpeg"; 
+import ChatIcon from "../Images/ChatIcon.jpeg";
 import UserProfileLogo from "../Images/UserProfileLogo.png";
 import { useNavigate, NavLink } from "react-router-dom";
-import {useLocation}  from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import axios from 'axios';
-const Profile=({FirstName,LastName,batchYear,company,gender})=>(
-  <section className="container mx-auto mt-8">
-  <div className="bg-white shadow-md rounded-md p-4 flex items-center">
-    <img src={UserProfileLogo} alt="User Profile" className="h-16 w-16 rounded-full" />
-    <div className="ml-4">
-      <h2 className="text-lg font-semibold">{FirstName} {LastName}</h2>
-      <p className="text-gray-600">Batch:{batchYear} </p>
-      <p className="text-gray-600">Company: {company}</p>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">View Details</button>
-    </div>
-  </div>
-</section>
-);
+import UserPagination from './UserPagination';
 
 function ClientHomepage() {
-    const location =useLocation();
-     const {state}=location;
-    console.log("abc ",state);
-  const [profile,setProfile]=useState([]);
-  
-  useEffect(()=>{
+  const location = useLocation();
+  const { state } = location;
+  console.log("abc ", state);
+  const [profile, setProfile] = useState([]);
+
+  useEffect(() => {
     fetchData();
- },[]);
-  const fetchData=async()=>{
-          await axios.get("http://localhost:4000/api/v1/users")
-            .then((res)=>{
-              setProfile(res.data);
-            }).catch((error)=>{
-               console.log(error);
-            });
-            
+  }, []);
+
+  const fetchData = async () => {
+    await axios.get("http://localhost:4000/api/v1/users")
+      .then((res) => {
+        setProfile(res.data);
+      }).catch((error) => {
+        console.log(error);
+      });
   }
-  const navigate = useNavigate() ;
+
+  const navigate = useNavigate();
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
@@ -63,33 +52,32 @@ function ClientHomepage() {
   };
 
   return (
-    
     <div className="bg-gray-100 min-h-screen">
       {/* Header Section */}
       <header className="bg-white shadow-lg">
-        <div className="container mx-auto flex justify-between items-center py-4">
-          <div className="pl-4">
+        <div className="container mx-auto flex justify-between items-center py-4 px-4">
+          <div>
             <img src={Logo} alt="Logo" className="h-16" />
           </div>
           <div className="flex items-center space-x-4">
-            <img src={ChatIcon} alt="Chat Icon" className="h-10" />
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate(`/chat/${state?.profile?._id}`)}>Chat</button>
-            <img src={UserProfileLogo} alt="User Profile Logo" className="h-10" />
-            <button className="bg-blue-500 hover:bg-blue-600
-             text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate(`/dashboard/${state?.profile?._id}`)}>Profile</button>
+            {/* Search Input */}
+            <div className="relative flex items-center">
+              <input type="text" placeholder="Search..." className="px-4 py-2 w-48 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500" />
+              <button className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2 bg-blue-500 text-white rounded-full">Search</button>
+            </div>
+            <a className="" onClick={() => navigate(`/chat/${state?.profile?._id}`)}>
+              <img src={ChatIcon} alt="Chat Icon" className="h-10" />
+            </a>
+            <a className="" onClick={() => navigate(`/dashboard/${state?.profile?._id}`)}>
+              <img src={UserProfileLogo} alt="User Profile Logo" className="h-10" />
+            </a>
           </div>
         </div>
       </header>
-      
+
       {/* Main Content */}
       <section className="container mx-auto mt-8 px-4">
-        <div className="flex items-center justify-between">
-          {/* Search Input */}
-          <div className="relative flex items-center">
-            <input type="text" placeholder="Search..." className="px-4 py-2 w-80 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500" />
-            <button className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2 bg-blue-500 text-white rounded-full">Search</button>
-          </div>
-          
+        <div className="flex flex-col sm:flex-row items-center justify-between">
           {/* Filter Dropdown */}
           <div className="relative">
             <select onChange={handleFilterChange} value={selectedFilter} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
@@ -112,22 +100,7 @@ function ClientHomepage() {
       </section>
 
       {/* User Profile Box */}
-      {/* <section className="container mx-auto mt-8">
-        <div className="bg-white shadow-md rounded-md p-4 flex items-center">
-          <img src={UserProfileLogo} alt="User Profile" className="h-16 w-16 rounded-full" />
-          <div className="ml-4">
-            <h2 className="text-lg font-semibold">Name</h2>
-            <p className="text-gray-600">Batch: {selectedYear}</p>
-            <p className="text-gray-600">Company: Example Company</p>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">View Details</button>
-          </div>
-        </div>
-      </section> */}
-    <div className='w-[400px] h-[700px]'>
-      {profile.map((item,idx)=>(
-           <Profile key={idx} {...item}/>
-      ))}
-    </div>
+      <UserPagination profiles={profile} />
     </div>
   );
 }
