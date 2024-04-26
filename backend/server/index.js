@@ -21,6 +21,17 @@ require("./database").connect();
 const user = require("./routes/user");
 app.use("/api/v1", user);
 
+
+//Chat routers
+
+const ChatRoute = require('./routes/ChatRoute');
+const MessageRoute=require('./routes/MessageRoute');
+
+app.use("/Chat",ChatRoute);
+app.use("/message",MessageRoute);
+
+
+
 // activate
 app.listen(PORT, () => {
     console.log(`App is listening at ${PORT}`);

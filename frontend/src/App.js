@@ -16,7 +16,11 @@ import Gallery from './Pages/Gallery';
 import About from './Pages/About';
 import Otppg from './Pages/Otppg';
 import VerifyOtp from './Pages/VerifyOtp';
+
+import Chat from './Pages/Chat/Chat'
+
 import Vision from './Pages/Vision'
+
 
 
 const App = () => {
@@ -30,6 +34,11 @@ const App = () => {
         <Routes>
           <Route path = "/" element={<Home />} />
 
+          {/* ..................Chat Route ................ */}
+
+            <Route path="/chat/:userid" element={<Chat/>}></Route>
+
+          {/* ..................The End....................... */}
           <Route path="/dashboard/:userid" element={<Layout />}>
             <Route path="user/:userid" element={<Dashboard />} />
             <Route path="ChangePassword/:userid" element={<ChangePassword />} />

@@ -73,7 +73,7 @@ function ClientHomepage() {
           </div>
           <div className="flex items-center space-x-4">
             <img src={ChatIcon} alt="Chat Icon" className="h-10" />
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">Chat</button>
+            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate(`/chat/${state?.profile?._id}`)}>Chat</button>
             <img src={UserProfileLogo} alt="User Profile Logo" className="h-10" />
             <button className="bg-blue-500 hover:bg-blue-600
              text-white font-semibold py-2 px-4 rounded-full" onClick={()=>navigate(`/dashboard/${state?.profile?._id}`)}>Profile</button>
