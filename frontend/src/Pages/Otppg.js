@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Logo from '../Images/Logo.jpg';
 import codeimg from '../Images/codeimg.jpg';
 import { NavLink, useNavigate } from 'react-router-dom';
-
+import axios from 'axios'
 const Otppg = () => {
   const history = useNavigate();
   const [email, setEmail] = useState('');
@@ -10,9 +10,20 @@ const Otppg = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform any necessary validation here
-    
+    axios.post("http://localhost:4000/api/v1/signup",{email}).then((res)=>{
+      console.log(res);
+      if(res.data.message==='User already registered' && res.data.success==false){
+          history("/login");
+      }
+      if(res.data.message==='OTP Sent Successfully' && res.data.success==true){
+          history("/VerifyOtp")
+      }
+    }).catch((err)=>{
+      console.log("Error in Otgpg",err.message);
+    })
+    console.log(email);
     // Redirect to the verify OTP page
-    history.push('/VerifyOtp');
+    // history.push('/VerifyOtp');
   };
 
   return (
@@ -41,9 +52,10 @@ const Otppg = () => {
             <div className="SignIn-link pt-4 ml-[12.5rem] md:ml-6 mt-6 flex gap-2">
             </div>
             {/* Submit Button */}
-            <NavLink to="/VerifyOtp" className="button-link">
+            <NavLink  className="button-link">
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="relative w-[200px] h-[50px] ml-10 bg-blue-500 text-[16px] text-black hover:bg-blue-900 ml-24 text-[#fff] cursor-pointer rounded-3xl mt-20 border border-black"
               >
                 Send OTP

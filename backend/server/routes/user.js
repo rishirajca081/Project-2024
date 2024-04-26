@@ -8,8 +8,8 @@ const userp = require("../Controllers/userp");
 
 
 router.post("/signup", sendOTP);
-router.post('/user-account', signup);
 router.post('/verify-otp', verifyOTP);
+router.post('/user-account', signup);
 router.post("/login", login);
 
 
