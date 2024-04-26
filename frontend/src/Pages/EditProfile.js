@@ -2,28 +2,41 @@ import React, { useState,useEffect } from 'react';
 import User from '../Images/User.png';
 import profilebg from '../Images/profilebg.jpg';
 import '../App.css'
+import { useParams } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
 import {useLocation} from 'react-router-dom';
+import axios from "axios"
 export default function EditProfile() {
+  const {userid}= useParams()
+  
+  const [UserData,setUserData]= useState([]);
 
+
+  useEffect(()=>{
+      axios.get(`http://localhost:4000/api/v1//user/${userid}`).then((res)=>{
+          setUserData(res.data);
+      }).catch((err)=>{
+        console.log("error in dahboard",err.message);
+      })
+  },[userid])
   // const location =useLocation();
   // const {state}=location;
   // // console.log(state.val.profile);
   // const userData=state.val.profile;
   // console.log(userData);
 
-  const [UserData, setUserData] = useState({
-    FirstName: "John",
-    LastName: "John",
-    email: "john.doe@example.com",
-    collegeRegNo: "123456",
-    company: "ABC Corp",
-    batchYear: "2018",
-    phoneNumber: "1234567890",
-    gender: "Male",
-    dob: "1990-01-01",
-    // Add other fields as needed
-  });
+  // const [UserData, setUserData] = useState({
+  //   FirstName: "John",
+  //   LastName: "John",
+  //   email: "john.doe@example.com",
+  //   collegeRegNo: "123456",
+  //   company: "ABC Corp",
+  //   batchYear: "2018",
+  //   phoneNumber: "1234567890",
+  //   gender: "Male",
+  //   dob: "1990-01-01",
+  //   // Add other fields as needed
+  // });
 
 
   const handleUpdate = () => {
@@ -31,7 +44,6 @@ export default function EditProfile() {
       ...UserData
     };
     setUserData(newUserData);
-    console.log(UserData);
     
     // yaha pr api call se newuserdata ko data ko database me store !!
   };
@@ -82,7 +94,7 @@ export default function EditProfile() {
         <div className='flex flex-col gap-0 w-[100px]'>
         <p className='font-bold'>Reg no.</p>
         <input type="text" name='regNo' id='regNo' autoComplete='off' placeholder='Registration Number'
-            value={UserData.collegeRegNo}
+            value={UserData.collegeRegno}
             onChange={(e)=>setUserData({ ...UserData, collegeRegNo: e.target.value })}
             className='border border-black rounded-md p-2 
             focus:outline-none focus:border-black-500 w-[400px] h-[40px] mt-2' />

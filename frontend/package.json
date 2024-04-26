@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "@coreui/coreui": "^5.0.0",
     "@coreui/react": "^5.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",

@@ -23,17 +23,17 @@ const App = () => {
     <div>
     
       <BrowserRouter>
-      <MaybeShowNavbar>
+      {/* <MaybeShowNavbar>
       <Navbar/>
-      </MaybeShowNavbar>
+      </MaybeShowNavbar> */}
         <Routes>
           <Route path = "/" element={<Home />} />
 
-          <Route path="/dashboard" element={<Layout />}>
-            <Route path="user" element={<Dashboard />} />
-            <Route path="ChangePassword" element={<ChangePassword />} />
-            <Route path="Profile" element={<Profile />} />
-            <Route path="EditProfile" element={<EditProfile />} />
+          <Route path="/dashboard/:userid" element={<Layout />}>
+            <Route path="user/:userid" element={<Dashboard />} />
+            <Route path="ChangePassword/:userid" element={<ChangePassword />} />
+            <Route path="Profile/:userid" element={<Profile />} />
+            <Route path="EditProfile/:userid" element={<EditProfile />} />
           </Route>
           <Route path="/ClientHomepage" element={<ClientHomepage />} />
           <Route path = "/Home" element={<Home />} />

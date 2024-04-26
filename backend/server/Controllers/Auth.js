@@ -22,6 +22,7 @@ const { options } = require("../routes/user");
 require("dotenv").config();
 
 
+
 // SendOTP
 exports.sendOTP = async (req, res) =>  {
     console.log(req.body);
