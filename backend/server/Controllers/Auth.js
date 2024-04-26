@@ -4,7 +4,7 @@ const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-// const otpDB = require('../models/OTP');
+const otpDB = require('../models/OTP');
 
 const { options } = require("../routes/user");
 require("dotenv").config();
@@ -119,7 +119,7 @@ exports.verifyOTP = async (req, res) =>  {
 exports.signup = async (req, res) => {
     try {
         //get data
-        const { FirstName, LastName, collegeRegno, password, dob, phoneNumber, batchYear, company, gender} = req.body;
+        const { FirstName, LastName, collegeRegno, password, dob, phoneNumber, batchYear, company, gender, email} = req.body;
         
         // check if user already exists
         const existingUser = await User.findOne({ email });
@@ -128,6 +128,7 @@ exports.signup = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: 'User already Exists',
+                data: existingUser
             });
         }
         
@@ -144,8 +145,8 @@ exports.signup = async (req, res) => {
             phoneNumber,
             batchYear,
             company,
-            gender,
-            email
+            gender
+             //ye enail HATEGA KYAAAA
         });
 
         return res.status(200).json({

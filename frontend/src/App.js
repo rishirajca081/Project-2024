@@ -21,18 +21,19 @@ import VerifyOtp from './Pages/VerifyOtp';
 const App = () => {
   return (
     <div>
+    
       <BrowserRouter>
       <MaybeShowNavbar>
       <Navbar/>
       </MaybeShowNavbar>
         <Routes>
-          <Route path = "/Home" element={<Home />} />
+          <Route path = "/" element={<Home />} />
 
-          <Route path="/" element={<Layout />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/ChangePassword" element={<ChangePassword />} />
-            <Route path="/Profile" element={<Profile />} />
-            <Route path="/EditProfile" element={<EditProfile />} />
+          <Route path="/dashboard" element={<Layout />}>
+            <Route path="user" element={<Dashboard />} />
+            <Route path="ChangePassword" element={<ChangePassword />} />
+            <Route path="Profile" element={<Profile />} />
+            <Route path="EditProfile" element={<EditProfile />} />
           </Route>
           <Route path="/ClientHomepage" element={<ClientHomepage />} />
           <Route path = "/Home" element={<Home />} />
