@@ -29,7 +29,7 @@ const Login = () => {
     };
     console.log(userData);
     await axios
-      .post("http://localhost:4000/api/v1/login", userData)
+      .post(`${BASE_URL}/api/v1/login`, userData)
       .then((response) => {
         console.log('response in login >> ',response);
         if(response.data.success) {

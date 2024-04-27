@@ -22,7 +22,7 @@ export default function Dashboard() {
 
 
   useEffect(()=>{
-      axios.get(`http://localhost:4000/api/v1//user/${userid}`).then((res)=>{
+      axios.get(`${BASE_URL}/api/v1//user/${userid}`).then((res)=>{
           console.log("response ",res.data);
           setUserData(res.data);
       }).catch((err)=>{

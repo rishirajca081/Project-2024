@@ -18,7 +18,7 @@ const Otppg = () => {
 
     // Perform any necessary validation here
     if(!otpSentStatus){
-      const response = await axios.post('http://localhost:4000/api/v1/signup', { email });
+      const response = await axios.post(`${BASE_URL}/api/v1/signup`, { email });
       console.log(response.data);
       if (response.status === 200) {
         toast({
@@ -44,7 +44,7 @@ const Otppg = () => {
 
     if(otpSentStatus){
       try{
-        const response = await axios.post('http://localhost:4000/api/v1/verify-otp', { email, otp });
+        const response = await axios.post(`${BASE_URL}/api/v1/verify-otp`, { email, otp });
         console.log(response.data);
         if (response.status === 200) {
           toast({

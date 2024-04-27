@@ -45,7 +45,7 @@ const Chat = () => {
   //fetching the members on behave of login user
   useEffect(() => {
     const getChats = async () =>
-      axios.get(`http://localhost:4000/chat/${userid}`)
+      axios.get(`${BASE_URL}/chat/${userid}`)
         .then((res) => {
           console.log("response ", res.data);
           setChats(res.data);
