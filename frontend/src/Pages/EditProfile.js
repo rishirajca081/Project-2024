@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
 import {useLocation} from 'react-router-dom';
 import axios from "axios"
+import {BASE_URL} from '../../constant'
 export default function EditProfile() {
   const {userid}= useParams()
   

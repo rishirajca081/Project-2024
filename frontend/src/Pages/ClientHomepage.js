@@ -6,7 +6,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import UserPagination from './UserPagination';
-
+import {BASE_URL} from '../../constant'
 function ClientHomepage() {
   const location = useLocation();
   const { state } = location;

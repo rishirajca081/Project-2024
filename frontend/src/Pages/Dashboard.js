@@ -5,6 +5,7 @@ import User from '../Images/User.png';
 import profilebg from '../Images/profilebg.jpg'
 import newuser from '../Images/newuser.jpg'
 import '../App.css'
+import {BASE_URL} from '../../constant'
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
 import {useLocation,useParams} from 'react-router-dom';
 import axios from 'axios';

@@ -9,7 +9,7 @@ const Register = ({}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state || {};
-
+  import {BASE_URL} from '../../constant'
   
   const [batchYear, setBatchYear] = useState("");
   const [company, setCompany] = useState("");

@@ -8,7 +8,7 @@ import ChatBox from '../../Component/ChatBox/ChatBox';
 import { io } from 'socket.io-client';
 import Chat_Navbar from '../../Component/Shared/Chat_Navbar';
 import { FaUser } from 'react-icons/fa';
-
+import {BASE_URL} from '../../constant'
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);

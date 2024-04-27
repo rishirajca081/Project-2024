@@ -12,7 +12,7 @@ import axios from "axios";
 // import { toast } from "react-toastify";
 import { useToast } from '@chakra-ui/react';
 import "react-toastify/dist/ReactToastify.css";
-
+import {BASE_URL} from '../../constant'
 const Login = () => {
   
 

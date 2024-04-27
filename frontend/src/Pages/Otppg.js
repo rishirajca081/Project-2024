@@ -5,7 +5,7 @@ import codeimg from '../Images/codeimg.jpg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useToast, CircularProgress } from '@chakra-ui/react';
-
+import {BASE_URL} from '../../constant'
 const Otppg = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
