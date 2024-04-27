@@ -68,7 +68,7 @@ import loginimg from '../Images/loginimg.jpg';
 import codeimg from '../Images/codeimg.jpg';
 import { NavLink } from 'react-router-dom';
 import axios from "axios";
-import {BASE_URL} from '../../constant'
+
 const VerifyOtp = () => {
   // You can add state to manage OTP inputs here if needed
 

@@ -6,7 +6,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import UserPagination from './UserPagination';
-import {BASE_URL} from '../../constant'
+
 function ClientHomepage() {
   const location = useLocation();
   const { state } = location;
@@ -18,7 +18,7 @@ function ClientHomepage() {
   }, []);
 
   const fetchData = async () => {
-    await axios.get(`${BASE_URL}/api/v1/users`)
+    await axios.get(`https://connect-hub-r42b.onrender.com/api/v1/users`)
       .then((res) => {
         setProfile(res.data);
       }).catch((error) => {

@@ -12,7 +12,7 @@ import axios from "axios";
 // import { toast } from "react-toastify";
 import { useToast } from '@chakra-ui/react';
 import "react-toastify/dist/ReactToastify.css";
-import {BASE_URL} from '../../constant'
+
 const Login = () => {
   
 
@@ -46,7 +46,7 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/v1/login`, userData);
+      const response = await axios.post(`https://connect-hub-r42b.onrender.com/api/v1/login`, userData);
       if (response.data.success) {
         navigate("/ClientHomepage", { state: { profile: response.data.user } });
       }

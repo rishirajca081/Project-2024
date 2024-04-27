@@ -5,7 +5,7 @@ import codeimg from '../Images/codeimg.jpg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useToast, CircularProgress } from '@chakra-ui/react';
-import {BASE_URL} from '../../constant'
+
 const Otppg = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -21,7 +21,7 @@ const Otppg = () => {
 
     try {
       if (!otpSentStatus) {
-        const response = await axios.post(`${BASE_URL}/api/v1/signup`, { email });
+        const response = await axios.post(`https://connect-hub-r42b.onrender.com/api/v1/signup`, { email });
         console.log(response.data);
         if (response.status === 200) {
           toast({
@@ -44,7 +44,7 @@ const Otppg = () => {
           console.log(response.status);
         }
       } else {
-        const response = await axios.post(`${BASE_URL}/api/v1/verify-otp`, { email, otp });
+        const response = await axios.post(`https://connect-hub-r42b.onrender.com/api/v1/verify-otp`, { email, otp });
         console.log(response.data);
         if (response.status === 200) {
           navigate('/register', { state: { email } })

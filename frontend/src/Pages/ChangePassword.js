@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logimg from '../Images/logimg.jpg'; // Import your background image
-import {BASE_URL} from '../../constant'
+
 const ChangePassword = () => {
   const [formData, setFormData] = useState({
     currentPassword: '',

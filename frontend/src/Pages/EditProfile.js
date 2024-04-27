@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
 import {useLocation} from 'react-router-dom';
 import axios from "axios"
-import {BASE_URL} from '../../constant'
+
 export default function EditProfile() {
   const {userid}= useParams()
   
@@ -14,7 +14,7 @@ export default function EditProfile() {
 
 
   useEffect(()=>{
-      axios.get(`${BASE_URL}/api/v1//user/${userid}`).then((res)=>{
+      axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{
           setUserData(res.data);
       }).catch((err)=>{
         console.log("error in dahboard",err.message);
@@ -22,7 +22,7 @@ export default function EditProfile() {
   },[userid])
 
   const handleUpdate = () => {
-      axios.put(`${BASE_URL}/api/v1/user/${userid}`, UserData)
+      axios.put(`https://connect-hub-r42b.onrender.com/api/v1/user/${userid}`, UserData)
       .then((res) => {
         console.log("Update successful");
         console.log(res.data);

@@ -5,7 +5,7 @@ import User from '../Images/User.png';
 import profilebg from '../Images/profilebg.jpg'
 import newuser from '../Images/newuser.jpg'
 import '../App.css'
-import {BASE_URL} from '../../constant'
+
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
 import {useLocation,useParams} from 'react-router-dom';
 import axios from 'axios';
@@ -23,7 +23,7 @@ export default function Dashboard() {
 
 
   useEffect(()=>{
-      axios.get(`${BASE_URL}/api/v1//user/${userid}`).then((res)=>{
+      axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{
           console.log("response ",res.data);
           setUserData(res.data);
       }).catch((err)=>{
