@@ -224,6 +224,7 @@ const Register = ({}) => {
                 />
 
               </div>
+              
 
             <button
               type="submit"
