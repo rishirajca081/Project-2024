@@ -16,7 +16,7 @@ import Gallery from './Pages/Gallery';
 import About from './Pages/About';
 import Otppg from './Pages/Otppg';
 import VerifyOtp from './Pages/VerifyOtp';
-
+import {BASE_URL} from './constant'
 import Chat from './Pages/Chat/Chat'
 
 import Vision from './Pages/Vision'
