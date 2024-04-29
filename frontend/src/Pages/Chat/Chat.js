@@ -8,7 +8,7 @@ import ChatBox from '../../Component/ChatBox/ChatBox';
 import { io } from 'socket.io-client';
 import Chat_Navbar from '../../Component/Shared/Chat_Navbar';
 import { FaUser } from 'react-icons/fa';
-
+import {BASE_URL} from '../../constant'
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -45,7 +45,7 @@ const Chat = () => {
   //fetching the members on behave of login user
   useEffect(() => {
     const getChats = async () =>
-      axios.get(`http://localhost:4000/chat/${userid}`)
+      axios.get(`${BASE_URL}/chat/${userid}`)
         .then((res) => {
           console.log("response ", res.data);
           setChats(res.data);

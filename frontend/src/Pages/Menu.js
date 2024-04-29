@@ -1,21 +1,16 @@
 export const PRODUCTS = [
-    { name: "Drag And Drop", link: "#" },
-    { name: "Visual Studio X", link: "#" },
-    { name: "Easy Content", link: "#" },
+    { name: "Login", link: "#" },
+    { name: "Contact", link: "#" },
+    { name: "About", link: "#" },
   ];
   export const RESOURCES = [
-    { name: "Industries and tools", link: "#" },
-    { name: "Use cases", link: "#" },
-    { name: "Blog", link: "#" },
-    { name: "Online evenet", link: "#" },
-    { name: "Nostrud exercitation", link: "#" },
+    { name: "Alumni", link: "#" },
+    { name: "Gallery", link: "#" },
+    { name: "Jobs", link: "#" },
+    { name: "Events", link: "#" },
   ];
-  export const COMPANY = [
-    { name: "Diversity & inclusion", link: "#" },
-    { name: "About us", link: "#" },
-    { name: "Press", link: "#" },
-    { name: "Customer Stories", link: "#" },
-    { name: "Online communities", link: "#" },
+  export const ABOUT = [
+    { name: "We offer a variety of benefits and resources to our members, including access to exclusive events, discounts on products and services, and career resources.", link: "#" },
   ];
   export const CONTACT= [
     { name: "+91-123456789", link: "#" },

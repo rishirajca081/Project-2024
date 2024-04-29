@@ -9,7 +9,7 @@ const Register = ({}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state || {};
-
+  
   
   const [batchYear, setBatchYear] = useState("");
   const [company, setCompany] = useState("");
@@ -44,7 +44,7 @@ const Register = ({}) => {
     };
     console.log(userData);
     await axios
-      .post("http://localhost:4000/api/v1/user-account", userData)
+      .post(`https://connect-hub-r42b.onrender.com/api/v1/user-account`, userData)
       .then((response) => {
         console.log(response);
         if(response.data.success === true) {
