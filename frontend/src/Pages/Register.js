@@ -5,10 +5,10 @@ import Logo from "../Images/Logo.jpg";
 import RegisterSide from "../Images/RegisterSide.jpg";
 import axios from "axios";
 
-const Register = ({}) => {
+const Register = ({email}) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { email } = location.state || {};
+  //const { email } = location.state || {};
 
   const [batchYear, setBatchYear] = useState("");
   const [company, setCompany] = useState("");
