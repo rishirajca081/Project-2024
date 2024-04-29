@@ -15,20 +15,6 @@ const Footer = () => {
           <span className="text-teal-400">Connect</span> with us
           
         </h1>
-        <div>
-          {/* <input
-            type="text"
-            placeholder="Enter Your ph.no"
-            className="text-gray-800
-           sm:w-72 w-full sm:mr-5 mr-1 lg:mb-0 mb-4 py-2.5 rounded px-2 focus:outline-none"
-          /> */}
-          {/* <button
-            className="bg-teal-400 hover:bg-teal-500 duration-300 px-5 py-2.5 font-[Poppins]
-           rounded-md text-white md:w-auto w-full"
-          >
-            Request Code
-          </button> */}
-        </div>
       </div>
       <ItemsContainer />
       <div

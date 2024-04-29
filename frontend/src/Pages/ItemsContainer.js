@@ -1,11 +1,11 @@
 import Item from "./Item";
-import { PRODUCTS, RESOURCES, COMPANY, SUPPORT, CONTACT } from "./Menu";
+import { PRODUCTS, RESOURCES, ABOUT, CONTACT } from "./Menu";
 const ItemsContainer = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16">
-      <Item Links={PRODUCTS} title="QUICK LINKS" />
+    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-10">
+      <Item Links={ABOUT} title="About us" />
       <Item Links={RESOURCES} title="RESOURCES" />
-      <Item Links={COMPANY} title="COMPANY" />
+      <Item Links={PRODUCTS} title="QUICK LINKS" />
       <Item Links={CONTACT} title="CONTACT" />
     </div>
   );
