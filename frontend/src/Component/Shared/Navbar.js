@@ -43,6 +43,7 @@ const Navbar = () => {
           </svg>
         </button>
 
+
         {/* Mobile Menu */}
         <div
           className={`lg:hidden absolute top-0 left-0 h-screen w-3/4 bg-white z-50 transform ${
@@ -149,6 +150,7 @@ const Navbar = () => {
               Login / Signup
             </Link>
           </div>
+
         </div>
       </div>
     </nav>

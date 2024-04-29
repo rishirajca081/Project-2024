@@ -151,6 +151,7 @@ const Otppg = () => {
                 />
               </div>
             )}
+
             <div className="flex flex-col gap-2 justify-center items-center md:justify-start md:items-start">
             <p className="text-center text-gray-600">
               Already have an account?{" "}
@@ -162,6 +163,7 @@ const Otppg = () => {
               </NavLink>
             </p>
           </div>
+
             {/* Submit Button */}
             <div className="flex justify-center md:justify-start">
               <button
