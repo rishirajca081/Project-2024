@@ -5,10 +5,10 @@ import Logo from "../Images/Logo.jpg";
 import RegisterSide from "../Images/RegisterSide.jpg";
 import axios from "axios";
 
-const Register = ({email}) => {
+const Register = ({}) => {
   const navigate = useNavigate();
   const location = useLocation();
-  //const { email } = location.state || {};
+  const { email } = location.state || {};
 
   const [batchYear, setBatchYear] = useState("");
   const [company, setCompany] = useState("");
@@ -206,7 +206,7 @@ const Register = ({email}) => {
                   id="email"
                   name="email"
                   defaultValue={email || ""}
-                  disabled
+                  readOnly
                   required
                   className="border border-black bg-gray-200 rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
                 />
