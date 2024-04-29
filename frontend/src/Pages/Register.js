@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, NavLink,useLocation } from "react-router-dom";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 
 import Logo from "../Images/Logo.jpg";
 import RegisterSide from "../Images/RegisterSide.jpg";
@@ -9,12 +9,11 @@ const Register = ({}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state || {};
-  
-  
+
   const [batchYear, setBatchYear] = useState("");
   const [company, setCompany] = useState("");
   const currentYear = new Date().getFullYear();
-  
+
   //const [userEmail, setuserEmail] = useState(email);
 
   //setuserEmail(email);
@@ -25,7 +24,6 @@ const Register = ({}) => {
       setCompany("");
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,14 +42,17 @@ const Register = ({}) => {
     };
     console.log(userData);
     await axios
-      .post(`https://connect-hub-r42b.onrender.com/api/v1/user-account`, userData)
+      .post(
+        `https://connect-hub-r42b.onrender.com/api/v1/user-account`,
+        userData
+      )
       .then((response) => {
         console.log(response);
-        if(response.data.success === true) {
+        if (response.data.success === true) {
           console.log("created user successfully!");
-          alert("Registration successfull!\nLogin to proceed!")
+          alert("Registration successfull!\nLogin to proceed!");
           navigate("/login");
-        } 
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -59,19 +60,19 @@ const Register = ({}) => {
   };
 
   return (
-    <div>
-      <section className="flex flex-row overflow-hidden gap-44">
-        <div className="flex flex-col gap-10 ml-8">
-          <div className="flex flex-row gap-12 mt-6 ml-6">
-            <img src={Logo} alt="Logo" className="h-24" />
+    <div style={{ height: "100vh" }}>
+      <section className="flex flex-col md:flex-row md:gap-20">
+        <div className="flex flex-col px-10 py-5">
+          <div className="flex flex-col">
+            <img src={Logo} alt="Logo" className="h-16 w-16" />
             <h1 className="text-4xl font-bold mt-4 drop-shadow-lg">
               Register{" "}
             </h1>
           </div>
 
           <form onSubmit={handleSubmit} action="#" method="post">
-            <div className="flex flex-row gap-10">
-              <div className="mb-4">
+            <div className="flex flex-col md:flex-row md:gap-10">
+              <div className="mt-2">
                 <label htmlFor="firstname" className="block ">
                   First Name
                 </label>
@@ -80,10 +81,10 @@ const Register = ({}) => {
                   id="firstname"
                   name="firstname"
                   required
-                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2"
+                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
                 />
               </div>
-              <div className="mb-4">
+              <div className="mt-2">
                 <label htmlFor="lastname" className="block ">
                   Last Name
                 </label>
@@ -92,12 +93,12 @@ const Register = ({}) => {
                   id="lastname"
                   name="lastname"
                   required
-                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2"
+                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
                 />
               </div>
             </div>
-            <div className="flex flex-row gap-10">
-              <div className="mb-4">
+            <div className="flex flex-col md:flex-row md:gap-10">
+              <div className="mt-2">
                 <label htmlFor="regno" className="block ">
                   {" "}
                   College Registration No
@@ -107,10 +108,10 @@ const Register = ({}) => {
                   id="regno"
                   name="regno"
                   required
-                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2"
+                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
                 />
               </div>
-              <div className="mb-4">
+              <div className="mt-2">
                 <label htmlFor="dob" className="block ">
                   Date of Birth:
                 </label>
@@ -119,12 +120,12 @@ const Register = ({}) => {
                   id="dob"
                   name="dob"
                   required
-                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2"
+                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
                 />
               </div>
             </div>
-            <div className="flex flex-row gap-10">
-              <div className="mb-4">
+            <div className="flex flex-col md:flex-row md:gap-10">
+              <div className="mt-2">
                 <label htmlFor="phone" className="block">
                   Phone Number:
                 </label>
@@ -133,10 +134,56 @@ const Register = ({}) => {
                   id="phone"
                   name="phone"
                   required
-                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-3 border rounded-md "
+                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2 border rounded-md "
                 />
               </div>
-              <div className="mb-4">
+              <div className="mt-2">
+                <label htmlFor="gender" className="block">
+                  Gender:
+                </label>
+                <select
+                  id="gender"
+                  name="gender"
+                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row md:gap-10">
+              <div className="mt-2">
+                <label htmlFor="company" className="block">
+                  Current Company:
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  className={`border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2 ${
+                    parseInt(batchYear) === currentYear ? "bg-gray-200" : ""
+                  }`}
+                  disabled={parseInt(batchYear) === currentYear}
+                />
+              </div>
+              <div className="mt-2">
+                <label htmlFor="password" className="block">
+                  Password:
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row md:gap-10 flex-wrap">
+              <div className="mt-2">
                 <label htmlFor="batchyear" className="block">
                   Batch Year:
                 </label>
@@ -147,114 +194,51 @@ const Register = ({}) => {
                   value={batchYear}
                   onChange={handleBatchYearChange}
                   required
-                  className="border border-black rounded-md focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-3 "
+                  className="border border-black rounded-md focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2 "
                 />
               </div>
-            </div>
-            <div className="flex flex-row gap-10">
-              <div className="mb-4">
-                <label htmlFor="company" className="block">
-                  Current Company:
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                  className={`border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2 ${
-                    parseInt(batchYear) === currentYear ? "bg-gray-200" : ""
-                  }`}
-                  disabled={parseInt(batchYear) === currentYear}
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="password" className="block">
-                  Password:
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  required
-                  className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2"
-                />
-              </div>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="gender" className="block">
-                Gender:
-              </label>
-              <select
-                id="gender"
-                name="gender"
-                className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2"
-              >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            {/* <div className="mb-4">
+              <div className="mt-2 block">
                 <label htmlFor="email" className="block">
-                  email:
-                </label>
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange
-                  required
-                  className="border border-black rounded-md focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-3 "
-                />
-              </div> */}
-              <div className="mb-4">
-                <label htmlFor="email" className="block ">
                   email
                 </label>
                 <input
-                 type="text"
+                  type="text"
                   id="email"
                   name="email"
-                  defaultValue={email || ''}
-                  readOnly
+                  defaultValue={email || ""}
+                  disabled
                   required
-                 className="border border-black rounded-md p-2 focus:outline-none focus:border-black-500 w-[300px] h-[50px] mt-2"
+                  className="border border-black bg-gray-200 rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
                 />
-
               </div>
-
-            <button
-              type="submit"
-              className="relative w-[200px] h-[50px] ml-10 bg-blue-500 text-[16px] text-black hover:bg-blue-900 ml-48 text-[#fff] cursor-pointer rounded-3xl mt-20 mb-4 border border-black"
-            >
-              Register
-            </button>
+            </div>
+            <div className="flex justify-center items-center py-5">
+              <button
+                type="submit"
+                className="relative w-[200px] h-[40px] bg-blue-500 text-[16px] text-black hover:bg-blue-900 text-[#fff] cursor-pointer rounded-3xl border border-black"
+              >
+                Register
+              </button>
+            </div>
           </form>
         </div>
+        <div
+  className="hidden md:col-span-4  p-10 w-full text-white md:flex justify-center items-center relative"
+  style={{
+    backgroundImage: `url(${RegisterSide})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    height: "100vh",
+  }}
+>
+  <div className="absolute inset-0 bg-black opacity-50"></div>{" "}
+  {/* Overlay */}
+  <p className="text-center text-6xl font-600 leading-normal uppercase z-10">
+    Connecting the past <br />to <br /> shape the future
+  </p>
+</div>
 
-        <img
-          src={RegisterSide}
-          alt="Register Side "
-          className="w-[700px] mr-0 "
-        />
-
-        <div className="absolute bottom-0 right-0 text-white text-5xl  mb-10 mr-10 p-4">
-          <p className="ml-4 mb-4 ">Connecting the past</p>
-          <p className="ml-4 mb-4">to shape the</p>
-          <p className="mt-2 ml-4 mb-4">future</p>
-        </div>
       </section>
-        <p className="mt-4 text-center text-gray-600">
-        Already have an account? 
-        <NavLink 
-          to="/login" 
-          className="text-blue-500 hover:text-blue-700 ml-2 underline"
-        >
-          Login
-        </NavLink>
-      </p>
     </div>
   );
 };
