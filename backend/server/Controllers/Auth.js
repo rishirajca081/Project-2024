@@ -1,26 +1,14 @@
-// controllers/Auth.js
-
-//const cloudinary = require('cloudinary').v2;
-
-// Initialize Cloudinary with your cloud_name, api_key, and api_secret
-// cloudinary.config({ 
-//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-//   api_key: process.env.CLOUDINARY_API_KEY, 
-//   api_secret: process.env.CLOUDINARY_API_SECRET 
-// });
-
-
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator");
 const User = require("../models/User");
+const CommonUsers = require('../models/CommonUsers');
 const jwt = require("jsonwebtoken");
 const otpDB = require('../models/OTP');
 
 const { options } = require("../routes/user");
 require("dotenv").config();
-
 
 
 // SendOTP
@@ -110,6 +98,7 @@ exports.verifyOTP = async (req, res) =>  {
         }
 
         const getStoredOTP = await otpDB.findOne({email});
+        console.log(getStoredOTP);
         if(otp === getStoredOTP.otp){
             return res.status(200).json({
                 success: true,
@@ -137,6 +126,7 @@ exports.signup = async (req, res) => {
 
     //   // Upload profile picture to Cloudinary
     // const result = await cloudinary.uploader.upload(path, { folder: 'profile_pictures' });
+
 
         // check if user already exists
         const existingUser = await User.findOne({ email });
@@ -167,7 +157,6 @@ exports.signup = async (req, res) => {
         });
 
         
-
         // Dynamically create collection for the batch year if not present
         const collectionName = `students_${batchYear}`;
         const collections = await mongoose.connection.db.collections();
@@ -178,6 +167,10 @@ exports.signup = async (req, res) => {
 
         // Insert the user into the appropriate collection
         await mongoose.connection.db.collection(collectionName).insertOne(user.toObject());
+        const commonUser = await CommonUsers.create({
+            email,
+            batchYear
+          });
 
         return res.status(200).json({
             success: true,
@@ -191,6 +184,9 @@ exports.signup = async (req, res) => {
         });
     }
 };
+
+
+
 
 //login
 exports.login = async (req, res) => {
@@ -209,6 +205,7 @@ exports.login = async (req, res) => {
         //check for registered user
         let user = await User.findOne({ email });
 
+
         //if not a registered user
         if (!user) {
             return res.status(401).json({
@@ -220,11 +217,17 @@ exports.login = async (req, res) => {
         // Verify password
         if (await bcrypt.compare(password, user.password)) {
             // Password match
+
             // Check the batch year and get the appropriate collection name
-            const collectionName = `students_${user.batchYear}`;
+            let collectionName = "";
+            const existinguser = await CommonUsers.findOne({ email });
+            if (existinguser) {
+                collectionName = `students_${existinguser.batchYear}`;
+            }
 
             // Find the user in the appropriate collection
             user = await mongoose.connection.collection(collectionName).findOne({ email });
+
 
             // If user not found in the specified collection, return error
             if (!user) {
@@ -279,11 +282,6 @@ exports.login = async (req, res) => {
 
 
 
-
-
-
-
-
 // logout
 exports.logout = async (req, res) => {
     try {
@@ -302,86 +300,3 @@ exports.logout = async (req, res) => {
         });
     }
 }
-
-
-
-
-
-//login
-// exports.login = async (req,res) => {
-//     try {
-
-//         //data fetch
-//         const {email, password} = req.body;
-
-//         //validation on email and password
-//         if(!email || !password) {
-//             return res.status(400).json({
-//                 success:false,
-//                 message:'PLease fill all the details carefully',
-//             });
-//         }
-
-//         //check for registered user
-//         let user = await User.findOne({ email });
-
-//         //if not a registered user
-//         if(!user) {
-//             return res.status(401).json({
-//                 success:false,
-//                 message:'User is not registered',
-//             });
-//         }
-
-//    // Create and return JWT token
-//         const payload = {
-//             email:user.email,
-//             id:user._id,
-//         };
-
-//      // verify password & generate a JWT token
-//         if(await bcrypt.compare(password,user.password) ) {
-//             // password match
-//             let token =  jwt.sign(payload, process.env.jwt_secret,
-//                                 {
-//                                     expiresIn:"2h",
-//                                 });
-
-//             user = user.toObject();
-//             user.token = token;
-//             user.password = undefined;
-
-//             const options = {
-//                 expires: new Date( Date.now() + 3 * 24 * 60 * 60 * 1000),
-//                 httpOnly:true,
-//             }
-
-//             //create cookies
-//             // save user data token in cookies
-//             res.cookie("babbarCookie", token, options).status(200).json({
-//                 success:true,
-//                 token,
-//                 user,
-//                 message:'User Logged in successfully',
-//             });
-//         }
-//         else {
-
-//             //password do not match
-//             return res.status(403).json({
-//                 success:false,
-//                 message:"Password Incorrect",
-//             });
-//         }
-
-//     }
-//     catch(error) {
-//         console.log(error);
-//         return res.status(500).json({
-//             success:false,
-//             message:'Login Failure',
-//         });
-
-//     }
-// }
-
