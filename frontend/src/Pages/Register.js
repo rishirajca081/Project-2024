@@ -5,15 +5,17 @@ import Logo from "../Images/Logo.jpg";
 import RegisterSide from "../Images/RegisterSide.jpg";
 import axios from "axios";
 
+
 const Register = ({}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state || {};
 
+  
   const [batchYear, setBatchYear] = useState("");
   const [company, setCompany] = useState("");
   const currentYear = new Date().getFullYear();
-
+  
   //const [userEmail, setuserEmail] = useState(email);
 
   //setuserEmail(email);
@@ -24,6 +26,7 @@ const Register = ({}) => {
       setCompany("");
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,23 +45,19 @@ const Register = ({}) => {
     };
     console.log(userData);
     await axios
-      .post(
-        `https://connect-hub-r42b.onrender.com/api/v1/user-account`,
-        userData
-      )
+      .post("https://connect-hub-r42b.onrender.com/api/v1/user-account", userData)
       .then((response) => {
         console.log(response);
-        if (response.data.success === true) {
+        if(response.data.success === true) {
           console.log("created user successfully!");
-          alert("Registration successfull!\nLogin to proceed!");
+          alert("Registration successfull!\nLogin to proceed!")
           navigate("/login");
-        }
+        } 
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   return (
     <div style={{ height: "100vh" }}>
       <section className="flex flex-col md:flex-row md:gap-20">
@@ -202,10 +201,10 @@ const Register = ({}) => {
                   email
                 </label>
                 <input
-                  type="text"
+                   type="text"
                   id="email"
                   name="email"
-                  defaultValue={email || ""}
+                  defaultValue={email || ''}
                   readOnly
                   required
                   className="border border-black bg-gray-200 rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
