@@ -14,7 +14,7 @@ const UserDetails = () => {
         console.log(res.data) ;
         setUserData(res.data);
     }).catch((err)=>{
-      console.log("error in dahboard",err.message);
+      console.log("error in dashboard",err.message);
     })
   },[])
   console.log(state.profile._id);
