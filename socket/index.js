@@ -46,7 +46,9 @@
 
 
 
-const io = require("socket.io")(8800, {
+const io = require("socket.io")("https://chat-server-v40p.onrender.com/"
+//8000
+, {
     cors: {
         // origin: "http://localhost:3000"
         origin: "https://project-2024-chi.vercel.app"
