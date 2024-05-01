@@ -20,7 +20,7 @@ export default function Dashboard() {
   const {userid} = useParams()
   console.log(userid);
   const [userData,setUserData]= useState([]);
-
+      
 
   useEffect(()=>{
       axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{

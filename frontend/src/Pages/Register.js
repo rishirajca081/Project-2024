@@ -206,7 +206,7 @@ const Register = ({}) => {
                   id="email"
                   name="email"
                   defaultValue={email || ""}
-                  disabled
+                  // disabled
                   required
                   className="border border-black bg-gray-200 rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
                 />
