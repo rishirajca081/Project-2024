@@ -18,7 +18,7 @@ export default function Dashboard() {
 
 
   const {userid} = useParams()
-  console.log(userid);
+  console.log("saurabh",userid);
   const [userData,setUserData]= useState([]);
       
 
