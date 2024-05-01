@@ -2,20 +2,22 @@ import React from 'react';
 import { FaUser, FaEnvelope, FaIdCard, FaBuilding, FaCalendarAlt, FaPhone, FaVenusMars,FaArrowLeft } from 'react-icons/fa';
 import UserProfileLogo from '../Images/UserProfileLogo.png';
 import Logo from '../Images/Logo.jpg'
-
+import { useLocation } from 'react-router-dom';
+import { useEffect,useState } from 'react';
+import axios from "axios"
 const UserDetails = () => {
   // Static user data
-  const userData = {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    regNo: '123456',
-    currentCompany: 'ABC Corp',
-    batchYear: '2018',
-    phoneNo: '+1234567890',
-    gender: 'Male',
-    dateOfBirth: '1990-01-01',
-  };
+  const {state}=useLocation();
+  const [userData,setUserData]= useState([]);
+  useEffect(()=>{
+    axios.get(`http://localhost:4000/api/v1//user/${state.profile._id}`).then((res)=>{
+        console.log(res.data) ;
+        setUserData(res.data);
+    }).catch((err)=>{
+      console.log("error in dahboard",err.message);
+    })
+  },[])
+  console.log(state.profile._id);
 
   return (
     <div className="flex flex-col gap-4 items-center justify-center min-h-screen bg-gradient-to-r from-gray-300 to-gray-200">
@@ -38,7 +40,7 @@ const UserDetails = () => {
           className="rounded-full w-48 h-48 mb-4 border-4 border-indigo-500"
         />
         <h2 className="text-2xl font-bold text-indigo-500">
-          {userData.firstName} {userData.lastName}
+          {userData.FirstName} {userData.LastName}
         </h2>
       </div>
       <div className="bg-white border border-black rounded-lg shadow-lg w-[800px] p-8">
@@ -55,14 +57,15 @@ const UserDetails = () => {
             <FaIdCard className="text-indigo-500 mr-2" />
             <div>
               <p className="text-gray-500 mb-1">Reg No.</p>
-              <p className="text-lg font-semibold">{userData.regNo}</p>
+              <p className="text-lg font-semibold">{userData.collegeRegno}</p>
             </div>
           </div>
           <div className="flex items-center">
             <FaBuilding className="text-indigo-500 mr-2" />
             <div>
               <p className="text-gray-500 mb-1">Current Company</p>
-              <p className="text-lg font-semibold">{userData.currentCompany}</p>
+              <p className="text-lg font-semibold">{userData.company
+}</p>
             </div>
           </div>
           <div className="flex items-center">
@@ -76,7 +79,7 @@ const UserDetails = () => {
             <FaPhone className="text-indigo-500 mr-2" />
             <div>
               <p className="text-gray-500 mb-1">Phone No.</p>
-              <p className="text-lg font-semibold">{userData.phoneNo}</p>
+              <p className="text-lg font-semibold">{userData.phoneNumber}</p>
             </div>
           </div>
           <div className="flex items-center">
@@ -90,7 +93,7 @@ const UserDetails = () => {
             <FaCalendarAlt className="text-indigo-500 mr-2" />
             <div>
               <p className="text-gray-500 mb-1">Date of Birth</p>
-              <p className="text-lg font-semibold">{userData.dateOfBirth}</p>
+              <p className="text-lg font-semibold">{userData.dob}</p>
             </div>
           </div>
         </div>

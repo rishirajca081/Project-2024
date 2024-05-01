@@ -18,7 +18,7 @@ function ClientHomepage() {
   }, []);
 
   const fetchData = async () => {
-    await axios.get("http://localhost:4000/api/v1/users")
+    await axios.get(`https://connect-hub-r42b.onrender.com/api/v1/users`)
       .then((res) => {
         setProfile(res.data);
       }).catch((error) => {

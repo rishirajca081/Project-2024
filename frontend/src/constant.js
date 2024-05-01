@@ -1,0 +1,1 @@
+export const BASE_URL = "https://connect-hub-r42b.onrender.com"
