@@ -1,19 +1,49 @@
 
 
 const ChatModel=require("../models/ChatModel");
+const { options } = require("../routes/user");
+const User=require("../models/User");
 
- const createChat=async(req,res)=>{
-    const newChat=new ChatModel({
+const createChat = async (req, res) => {
+    try {
+        const { senderId, receiverId } = req.body;
 
-        //see it later getting sender and receiver id
-        members:[req.body.senderId,req.body.receiverId],
-    });
-        try {
-            const result=await newChat.save();
-            res.status(200).json(result);
-        } catch (error) {
-            res.status(500).json(error);
+        
+        // const existingChat = await ChatModel.findOne({ members: { $in: [receiverId ,senderId] } });
+
+        //    console.log("rihdfghdghdhg",existingChat);
+        // if (existingChat) {
+            
+        //    return res.status(200).json(existingChat);
+        // }
+
+        
+        const newChat = new ChatModel({
+            members: [senderId, receiverId]
+        });
+
+        const result = await newChat.save();
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+
+//getting all the users........................................
+const allusers = async (req, res) => {
+    const keyword = req.query.search
+        ? {
+            $or: [
+                { FirstName: { $regex: req.query.search, $options: "i" } }, // Include options here
+                { email: { $regex: req.query.search, $options: "i" } }, // Include options here
+            ],
         }
+        : {};
+        //if we want to dont see login -- give the condition for the current login 
+    const users = await User.find(keyword);
+    res.status(200).json(users);
+    console.log(users);
 };
 
  const userChats=async(req,res)=>{
@@ -37,4 +67,4 @@ const ChatModel=require("../models/ChatModel");
         res.status(500).json(error);
     }
 }
-module.exports={createChat,findChat,userChats};
+module.exports={createChat,findChat,userChats,allusers};

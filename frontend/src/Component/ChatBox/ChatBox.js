@@ -31,13 +31,18 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
     
 
     //fetching data for msg
-
+    console.log("chat..",chat);
+    console.log("chat type...",typeof chat);
     useEffect(() => {
-        if (chat && chat._id) { // Add null check for chat and chat._id
+        if(chat) { // Add null check for chat and chat._id
+            if(chat._id){
             console.log("chat : ", chat._id);
-
+            
             // NOT WORKING PROPERLY SEE IT LATERLY  
 
+            if(chat===null){
+                window.location.reload();
+            }
             const fetchMessage = async () => {
                 axios.get(`http://localhost:4000/message/${chat._id}`).then((res) => {
 
@@ -48,6 +53,12 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
                 });
             };
             fetchMessage();
+        }
+        }
+        else{
+                
+                // window.location.reload()
+              
         }
     }, [chat]);
 
@@ -63,10 +74,8 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
             text: newMessage,
             chatId: chat._id,
         };
-        
-       
-
         // Send msg to backend endpoint
+
         try {
             const response = await axios.post('http://localhost:4000/message', message);
             const newMessageData = response.data; // Assuming the backend returns the saved message
@@ -81,6 +90,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
         setSendMessage({...message,receiverId});
 
     };
+
     const handleSendOnBtnClick = async (e) => {
         e.preventDefault();
         const message = {
@@ -114,6 +124,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
      },[recieveMessage])
 
     //  scroll to the last msg
+
     useEffect(()=>{
         scroll.current?.scrollIntoView({behavior:"smooth"})
     },[messages]);
