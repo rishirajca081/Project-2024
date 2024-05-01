@@ -51,6 +51,13 @@ function ClientHomepage() {
     setSelectedGender(gender);
   };
 
+  const handleProfileLogoClick = () => {
+    const userId = state?.profile?._id;
+    if (userId) {
+      navigate(`/dashboard/${userId}/user/${userId}`);
+    }
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* Header Section */}
@@ -68,7 +75,7 @@ function ClientHomepage() {
             <a className="" onClick={() => navigate(`/chat/${state?.profile?._id}`)}>
               <img src={ChatIcon} alt="Chat Icon" className="h-10" />
             </a>
-            <a className="" onClick={() => navigate(`/dashboard/${state?.profile?._id}`)}>
+            <a className="" onClick={handleProfileLogoClick}>
               <img src={UserProfileLogo} alt="User Profile Logo" className="h-10" />
             </a>
           </div>

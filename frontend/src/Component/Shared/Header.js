@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaUser, FaBell } from 'react-icons/fa'; // Import FaUser icon
 import UserImage from '../../Images/User.png';
+import { Link } from 'react-router-dom';
 
 const Header = ({ username }) => {
   return (
@@ -15,7 +16,9 @@ const Header = ({ username }) => {
         )}
       </div>
       <div className="flex items-center">
-        <FaUser className="text-gray-700 text-2xl mr-4 cursor-pointer" /> {/* User profile icon */}
+      <Link to="/clientHomepage" className="text-gray-700 text-2xl mr-4 cursor-pointer">
+    <FaUser />
+</Link> {/* User profile icon */}
         <FaBell className="text-gray-700 text-2xl mr-4 cursor-pointer" /> {/* Bell icon */}
         {/* Notification icon with onClick event for handling notifications */}
       </div>

@@ -29,8 +29,8 @@ const Navbar = () => {
         </ul>
         {/* Auth Buttons */}
         <div className="flex space-x-4">
-          <Link to="/Otppg" className="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800">Login/SignUp</Link>
-          {/* <Link to="/Register" className="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800">Sign Up</Link> */}
+          <Link to="/Otppg" className="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800">Login</Link>
+          <Link to="/Register" className="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800">Sign Up</Link>
         </div>
       </div>
     </nav>

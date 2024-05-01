@@ -20,6 +20,7 @@ import VerifyOtp from './Pages/VerifyOtp';
 import Chat from './Pages/Chat/Chat'
 
 import Vision from './Pages/Vision'
+import ViewDetails from './Pages/ViewDetails'
 
 
 
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="/Otppg" element={<Otppg />} />
           <Route path="/VerifyOtp" element={<VerifyOtp />} />
           <Route path="/Vision" element={<Vision />} />
+          <Route path="/ViewDetails" element={<ViewDetails />} />
         </Routes>
       </BrowserRouter>
     </div>
