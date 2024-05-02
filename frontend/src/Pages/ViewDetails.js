@@ -10,11 +10,11 @@ const UserDetails = () => {
   const {state}=useLocation();
   const [userData,setUserData]= useState([]);
   useEffect(()=>{
-    axios.get(`http://localhost:4000/api/v1//user/${state.profile._id}`).then((res)=>{
+    axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${state.profile._id}`).then((res)=>{
         console.log(res.data) ;
         setUserData(res.data);
     }).catch((err)=>{
-      console.log("error in dahboard",err.message);
+      console.log("error in dashboard",err.message);
     })
   },[])
   console.log(state.profile._id);

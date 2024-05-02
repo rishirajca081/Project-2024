@@ -18,7 +18,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
     useEffect(()=>{
         const userId = chat?.members?.find(id => id !== currentUser);
 
-    const getUserData=async()=>axios.get(`http://localhost:4000/api/v1/user/${userId}`).then((res)=>{
+    const getUserData=async()=>axios.get(`https://connect-hub-r42b.onrender.com/api/v1/user/${userId}`).then((res)=>{
         setUserData(res.data);
         console.log("user data",res.data);
      }).catch((err)=>{
@@ -44,7 +44,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
                 window.location.reload();
             }
             const fetchMessage = async () => {
-                axios.get(`http://localhost:4000/message/${chat._id}`).then((res) => {
+                axios.get(`https://connect-hub-r42b.onrender.com/message/${chat._id}`).then((res) => {
 
                     setMessages(res.data);
                     console.log("data",res.data);
@@ -77,7 +77,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
         // Send msg to backend endpoint
 
         try {
-            const response = await axios.post('http://localhost:4000/message', message);
+            const response = await axios.post('https://connect-hub-r42b.onrender.com/message', message);
             const newMessageData = response.data; // Assuming the backend returns the saved message
             setMessages([...messages, newMessageData]);
             setNewMessage("");
@@ -103,7 +103,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
 
         // Send msg to backend endpoint
         try {
-            const response = await axios.post('http://localhost:4000/message', message);
+            const response = await axios.post('https://connect-hub-r42b.onrender.com/message', message);
             const newMessageData = response.data; // Assuming the backend returns the saved message
             setMessages([...messages, newMessageData]);
             setNewMessage("");
