@@ -12,7 +12,7 @@ const Conversation = ({ data, currentUserId ,online}) => {
             
                 // You can fetch user data here using axios or any other method
     
-                    const getUserData=async()=>axios.get(`http://localhost:4000/api/v1/user/${userId}`).then((res)=>{
+                    const getUserData=async()=>axios.get(`https://connect-hub-r42b.onrender.com/api/v1/user/${userId}`).then((res)=>{
                        setUserData(res.data);
                        console.log("user data",res.data);
                     }).catch((err)=>{
