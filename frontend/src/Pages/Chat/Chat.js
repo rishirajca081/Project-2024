@@ -82,7 +82,7 @@ console.log("asdasfddfd",groupData?.GroupName)
   //fetching the members on behave of login user
   useEffect(() => {
     const getChats = async () =>
-      axios.get(`${BASE_URL}/chat/${userid}`)
+      axios.get(`https://connect-hub-r42b.onrender.com/chat/${userid}`)
         .then((res) => {
           console.log("response ", res.data);
           setChats(res.data);
