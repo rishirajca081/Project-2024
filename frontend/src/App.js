@@ -1,6 +1,6 @@
 import Home from './Pages/Home'
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, {useEffect} from 'react'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import ClientHomepage from './Pages/ClientHomepage'
@@ -16,7 +16,7 @@ import Gallery from './Pages/Gallery';
 import About from './Pages/About';
 import Otppg from './Pages/Otppg';
 import VerifyOtp from './Pages/VerifyOtp';
-
+import Cookies from 'js-cookie';
 import Chat from './Pages/Chat/Chat'
 
 import Vision from './Pages/Vision'
@@ -25,6 +25,8 @@ import ViewDetails from './Pages/ViewDetails'
 
 
 const App = () => {
+ 
+
   return (
     <div>
     

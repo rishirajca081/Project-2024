@@ -3,6 +3,8 @@ import Logo from "../Images/Logo.jpg";
 import codeimg from "../Images/logimg.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from 'js-cookie';
+
 // import { toast } from "react-toastify";
 import { useToast } from "@chakra-ui/react";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,6 +41,7 @@ const Login = () => {
         userData
       );
       if (response.data.success) {
+       
         navigate("/ClientHomepage", { state: { profile: response.data.user } });
       }
     } catch (err) {

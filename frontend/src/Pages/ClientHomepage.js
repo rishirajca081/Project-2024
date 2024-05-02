@@ -7,6 +7,8 @@ import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import UserPagination from './UserPagination';
 
+
+
 function ClientHomepage() {
   const location = useLocation();
   const { state } = location;
@@ -21,6 +23,7 @@ function ClientHomepage() {
     await axios.get(`https://connect-hub-r42b.onrender.com/api/v1/users`)
       .then((res) => {
         setProfile(res.data);
+        console.log(res.data);
       }).catch((error) => {
         console.log(error);
       });
@@ -30,6 +33,12 @@ function ClientHomepage() {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
 
+
+  function filterObjects(data, parameter, value) {
+    return data.filter(obj => obj[parameter] === value);
+}
+
+
   const handleFilterChange = (event) => {
     setSelectedFilter(event.target.value);
     setSelectedYear(""); // Reset selected year when filter changes
@@ -38,16 +47,22 @@ function ClientHomepage() {
 
   // Generate an array of years from 1984 to 2024
   const batchYears = [];
-  for (let year = 1984; year <= 2024; year++) {
+  for (let year = 1984; year <= 2025; year++) {
     batchYears.push(year);
   }
 
   const handleYearSelect = (year) => {
     setSelectedYear(year);
+   const filterData = filterObjects(profile, 'batchYear', year);
+   console.log(filterData);
+    setProfile(filterData);
   };
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
+    const filterData = filterObjects(profile, 'gender', gender.toLowerCase());
+   console.log(filterData);
+    setProfile(filterData);
   };
 
   // const handleProfileLogoClick = () => {
