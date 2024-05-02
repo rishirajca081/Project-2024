@@ -60,7 +60,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
                 // window.location.reload()
               
         }
-    }, [chat]);
+    }, [messages]);
 
     const handleChange=(newMessage)=>{
         setNewMessage(newMessage);
