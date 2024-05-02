@@ -25,7 +25,6 @@ function ClientHomepage() {
         console.log(error);
       });
   }
-
   const navigate = useNavigate();
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
@@ -51,12 +50,14 @@ function ClientHomepage() {
     setSelectedGender(gender);
   };
 
-  const handleProfileLogoClick = () => {
-    const userId = state?.profile?._id;
-    if (userId) {
-      navigate(`/dashboard/${userId}/user/${userId}`);
-    }
-  };
+  // const handleProfileLogoClick = () => {
+  //   const userId = state?.profile?._id;
+  //   console.log("rishiraj.......",state?.profile?._id);
+  //   if (userId) {
+  //     console.log("jasgfjkhsdghfjghsdhfjsgjfgsdj",userId);
+  //     navigate(`/dashboard/${userId}/user/${userId}`);
+  //   }
+  // };
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -75,8 +76,8 @@ function ClientHomepage() {
             <a className="" onClick={() => navigate(`/chat/${state?.profile?._id}`)}>
               <img src={ChatIcon} alt="Chat Icon" className="h-10" />
             </a>
-            <a className="" onClick={handleProfileLogoClick}>
-              <img src={UserProfileLogo} alt="User Profile Logo" className="h-10" />
+            <a href={`/dashboard/${state?.profile?._id}/user/${state?.profile?._id}`}>
+              <img src={UserProfileLogo} alt='logo' className='h-10'/>
             </a>
           </div>
         </div>

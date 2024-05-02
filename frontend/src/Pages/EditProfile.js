@@ -12,7 +12,7 @@ export default function EditProfile() {
   
   const [UserData,setUserData]= useState([]);
 
-
+  console.log("userid editing",userid);
   useEffect(()=>{
       axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{
           setUserData(res.data);

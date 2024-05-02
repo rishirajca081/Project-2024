@@ -6,7 +6,7 @@ const User = require("../models/User");
 const CommonUsers = require('../models/CommonUsers');
 const jwt = require("jsonwebtoken");
 const otpDB = require('../models/OTP');
-
+const group = require("../models/GroupModel")
 const { options } = require("../routes/user");
 require("dotenv").config();
 
@@ -157,8 +157,9 @@ exports.signup = async (req, res) => {
             email
         });
 
-        
+        console.log("abcd ",user._id)
         // Dynamically create collection for the batch year if not present
+
         const collectionName = `students_${batchYear}`;
         const collections = await mongoose.connection.db.collections();
         const collectionExists = collections.some(collection => collection.collectionName === collectionName);
@@ -167,11 +168,65 @@ exports.signup = async (req, res) => {
         }
 
         // Insert the user into the appropriate collection
+
         await mongoose.connection.db.collection(collectionName).insertOne(user.toObject());
         const commonUser = await CommonUsers.create({
             email,
             batchYear
           });
+
+
+        
+        // Group creation 
+
+        // const groupname= `students_${batchYear}`;
+        
+
+        // if(!isGroupExists){
+            //     const data = { [user._id]: groupname };
+            
+            //     console.log("object>> ",data)
+            
+            //     console.log(user.id);
+            // }else{
+                
+                // }
+                
+                const groupname = `students_${batchYear}`;
+                const isGroupExists = await group.findOne({GroupName:groupname});
+
+   
+    try {
+        if (!isGroupExists) {
+            const newGroup = await group.create({ GroupName: groupname, members: [user._id] });
+            console.log("New group created:", newGroup);
+        } else {
+            const existingGroup = await group.findOne({ GroupName: groupname });
+        
+            if (existingGroup) {
+                // Check if the user is already a member of the group
+                if (!existingGroup.members.includes(user._id)) {
+                    existingGroup.members.push(user._id);
+                    await existingGroup.save();
+                    console.log("User added to existing group:", existingGroup);
+                } else {
+                    console.log("User is already a member of the group.");
+                }
+            } else {
+                console.log("Group not found.");
+            }
+        }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+
+
+
+
+
+
+
+
 
         return res.status(200).json({
             success: true,
@@ -253,7 +308,7 @@ exports.login = async (req, res) => {
 
             // Set cookie options
             const options = {
-                expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+                expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
                 httpOnly: true,
             };
 
