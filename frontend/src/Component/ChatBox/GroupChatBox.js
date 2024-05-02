@@ -8,7 +8,7 @@
 //   const [socket, setSocket] = useState(null);
 // let newSocket;
 //   useEffect(() => {
-//      newSocket = io('http://localhost:8800');
+//      newSocket = io('https://connect-hub-r42b.onrender.com0');
 //     setSocket(newSocket);
 //     // return () => newSocket.disconnect();
 // }, []);
@@ -40,7 +40,7 @@
 //       setMessage('');
 //     }
 
-//     axios.post('http://localhost:4000/message/group',{
+//     axios.post('https://connect-hub-r42b.onrender.com/message/group',{
 //         chatId:group._id,
 //         senderId:curruser._id,
 //         text:message,
@@ -102,7 +102,7 @@ import axios from 'axios';
 //   const [socket, setSocket] = useState(null);
 // let newSocket;
 //   useEffect(() => {
-//      newSocket = io('http://localhost:8800');
+//      newSocket = io('https://connect-hub-r42b.onrender.com0');
 //     setSocket(newSocket);
 
 //     newSocket.emit("adduserToGroupchat", { group });
@@ -130,7 +130,7 @@ import axios from 'axios';
 //   }, [group]);
 
 //   const fetchGroupMessages = () => {
-//     axios.get(`http://localhost:4000/message/group/${group._id}`)
+//     axios.get(`https://connect-hub-r42b.onrender.com/message/group/${group._id}`)
 //       .then(response => {
 //         setMessages(response.data);
 //       })
@@ -156,7 +156,7 @@ import axios from 'axios';
 //     }   
             
 
-//     axios.post('http://localhost:4000/message/group', {
+//     axios.post('https://connect-hub-r42b.onrender.com/message/group', {
 //       chatId: group._id,
 //       senderId: curruser._id,
 //       text: message,
@@ -214,7 +214,7 @@ const GroupChatBox = ({ group, closeGroupChat, curruser }) => {
     const [socket, setSocket] = useState(null);
   
     useEffect(() => {
-      const newSocket = io('http://localhost:8800');
+      const newSocket = io('https://connect-hub-r42b.onrender.com0');
       setSocket(newSocket);
   
       newSocket.emit("adduserToGroupchat", { group });
@@ -235,7 +235,7 @@ const GroupChatBox = ({ group, closeGroupChat, curruser }) => {
     }, [group]);
   
     const fetchGroupMessages = () => {
-      axios.get(`http://localhost:4000/message/group/${group._id}`)
+      axios.get(`https://connect-hub-r42b.onrender.com/message/group/${group._id}`)
         .then(response => {
           // Ensure the response data is an array before setting it as messages
           if (Array.isArray(response.data)) {
@@ -262,7 +262,7 @@ const GroupChatBox = ({ group, closeGroupChat, curruser }) => {
       }   
 
       console.log("user name or not",curruser.FirstName);
-      axios.post('http://localhost:4000/message/group', {
+      axios.post('https://connect-hub-r42b.onrender.com/message/group', {
         chatId: group._id,
         senderId: curruser._id,
         text: message,

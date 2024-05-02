@@ -68,11 +68,6 @@ io.on("connection", (socket) => {
 
     // Add new User
     socket.on('new-user-add', (newUserId) => {
-<<<<<<< HEAD
-
-        // Check if user is not added previously
-=======
->>>>>>> f697a174fd17c48efd40ccec07c3fd9353c4a48b
         if (!activeUsers.some((user) => user.userId === newUserId)) {
             activeUsers.push({
                 userId: newUserId,

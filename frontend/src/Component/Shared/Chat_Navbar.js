@@ -17,7 +17,7 @@ const Chat_Navbar = () => {
 
   const handleSearch=async()=>{
     try {
-      const response = await axios.get(`http://localhost:4000/Chat/?search=${searchQuery}`);
+      const response = await axios.get(`https://connect-hub-r42b.onrender.com/Chat/?search=${searchQuery}`);
       console.log(response.data);
       setSearchedUser(response.data);
       console.log("xyzzzz",userid);
@@ -32,12 +32,12 @@ const Chat_Navbar = () => {
   
   const handleUserClick = async(user) => {
     try {
-      const response = await axios.post('http://localhost:4000/Chat', {
+      const response = await axios.post('https://connect-hub-r42b.onrender.com/Chat', {
         senderId: userid, // Assuming userid is defined somewhere in your code
         receiverId: user._id
       });
       
-      const data1 = await axios.get(`http://localhost:4000/api/v1/user/${user._id}`)
+      const data1 = await axios.get(`https://connect-hub-r42b.onrender.com/api/v1/user/${user._id}`)
 
       setPerson(data1.data);
       // Handle the response data here as needed
