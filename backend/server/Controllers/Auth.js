@@ -15,6 +15,7 @@ require("dotenv").config();
 exports.sendOTP = async (req, res) =>  {
     console.log(req.body);
     try {
+
         //fetch email from request ki body
         const {email} = req.body;
 
@@ -214,7 +215,7 @@ exports.login = async (req, res) => {
             });
         }
 
-        // Verify password
+         //  Verify password
         if (await bcrypt.compare(password, user.password)) {
             // Password match
 
@@ -271,7 +272,7 @@ exports.login = async (req, res) => {
             });
         }
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data.message);
         return res.status(500).json({
             success: false,
             message: 'Login Failure',
@@ -284,7 +285,7 @@ exports.login = async (req, res) => {
 
 // logout
 exports.logout = async (req, res) => {
-    try {
+    try {      
         // Clear the cookie containing the JWT token
         res.clearCookie("babbarCookie");
 

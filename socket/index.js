@@ -44,7 +44,6 @@
 //     })
 // })
 
-
 const io = require("socket.io")("8800", {
     cors: {
         origin: "https://project-2024-chi.vercel.app"
@@ -57,6 +56,7 @@ io.on("connection", (socket) => {
 
     // Add new User
     socket.on('new-user-add', (newUserId) => {
+
         // Check if user is not added previously
         if (!activeUsers.some((user) => user.userId === newUserId)) {
             activeUsers.push({

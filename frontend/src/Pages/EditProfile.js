@@ -17,7 +17,7 @@ export default function EditProfile() {
       axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{
           setUserData(res.data);
       }).catch((err)=>{
-        console.log("error in dahboard",err.message);
+        console.log("error in dashboard",err.message);
       })
   },[userid])
 

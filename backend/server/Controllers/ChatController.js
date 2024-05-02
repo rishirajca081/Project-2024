@@ -1,6 +1,6 @@
 
 
-const ChatModel=require("../models/ChatModel");
+const ChatModel = require("../models/ChatModel");
 
  const createChat=async(req,res)=>{
     const newChat=new ChatModel({

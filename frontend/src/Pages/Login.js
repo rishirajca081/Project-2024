@@ -46,7 +46,7 @@ const Login = () => {
         //toast.error("Incorrect email or password");
         toast({
           title: "Error",
-          description: "Incorrect Password.",
+          description: "Incorrect Password",
           status: "error",
           duration: 5000,
           isClosable: true,
