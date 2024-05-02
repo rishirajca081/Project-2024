@@ -156,7 +156,16 @@ exports.signup = async (req, res) => {
             email
         });
 
+<<<<<<< HEAD
+// <<<<<<< HEAD
+//         console.log("abcd ",user._id)
+
+// =======
+        
+// >>>>>>> 565fce3e292450974238d3d5a8e6b4dd4aad2c29
+=======
         console.log("abcd ",user._id)
+>>>>>>> 015be15295acdd25af43d1c1c3c005ec4f0cffc0
         // Dynamically create collection for the batch year if not present
 
         const collectionName = `students_${batchYear}`;
