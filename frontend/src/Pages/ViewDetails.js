@@ -2,28 +2,25 @@ import React from 'react';
 import { FaUser, FaEnvelope, FaIdCard, FaBuilding, FaCalendarAlt, FaPhone, FaVenusMars,FaArrowLeft } from 'react-icons/fa';
 import UserProfileLogo from '../Images/UserProfileLogo.png';
 import Logo from '../Images/Logo.jpg'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useEffect,useState } from 'react';
 import axios from "axios"
-import Cookies from 'js-cookie';
 
 const UserDetails = () => {
   // Static user data
-  // const {state}=useLocation();
+  const {state}=useLocation();
   const [userData,setUserData]= useState([]);
-  const storedToken = Cookies.get('user-jwt-token');
-  const storedUserId = Cookies.get('userid');
-  const state = {token: storedToken, profile : {_id: storedUserId} }
+  const {userid} = useParams();
 
   useEffect(()=>{
-    axios.get(`http://localhost:4000/api/v1//user/${state.profile._id}`).then((res)=>{
+    axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{
         console.log(res.data) ;
         setUserData(res.data);
     }).catch((err)=>{
       console.log("error in dahboard",err.message);
     })
   },[])
-  console.log(state.profile._id);
+  console.log(userid);
 
   return (
     <div className="flex flex-col gap-4 items-center justify-center min-h-screen bg-gradient-to-r from-gray-300 to-gray-200">

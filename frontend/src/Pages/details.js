@@ -12,7 +12,7 @@ const Details=( profile)=> {
       <p className="text-gray-600">Company: {profile.company}</p>
       <button
       onClick={()=>{
-           navigate('/ViewDetails' ,{state:{profile:profile}})
+           navigate(`/ViewDetails/${profile._id}` ,{state:{profile:profile}})
       }} 
       className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">View Details</button>
     </div>

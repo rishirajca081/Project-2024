@@ -10,7 +10,6 @@ import Cookies from 'js-cookie';
 const Login = () => {
 
   const navigate = useNavigate();
-  if(Cookies.get('userId')) navigate('/clientHomePage');
   const toast = useToast();
 
 

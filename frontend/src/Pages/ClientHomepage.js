@@ -26,9 +26,9 @@ function ClientHomepage() {
 
  
   useEffect(() => {
-
-    
-
+    if (!storedUserId) {
+      navigate('/login');
+    }
     if (!storedToken || !storedUserId || !storedProfile) {
       fetchData();
     }

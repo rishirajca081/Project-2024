@@ -24,9 +24,7 @@ const App = () => {
   const userid = Cookies.get('userid');
   console.log(userid + "appjs")
   // Redirect to Login page if userid is not available in cookie
-  if (!userid) {
-    return <Navigate to="/Login" />;
-  }
+
 
   return (
     <BrowserRouter>
@@ -53,7 +51,7 @@ const App = () => {
         <Route path="/Otppg" element={<Otppg />} />
         <Route path="/VerifyOtp" element={<VerifyOtp />} />
         <Route path="/Vision" element={<Vision />} />
-        <Route path="/ViewDetails" element={<ViewDetails />} />
+        <Route path="/ViewDetails/:userid" element={<ViewDetails />} />
       </Routes>
     </BrowserRouter>
   );

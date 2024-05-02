@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
 import {useLocation,useParams} from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function Dashboard() {
   // Dummy user data
   //   const location =useLocation();
@@ -18,13 +19,16 @@ export default function Dashboard() {
   // const userData=state?.val?.profile;
 
 
-  // const {userid} = useParams()
-  const userid = Cookies.get('userid');
+  const {userid} = useParams()
+  // const userid = Cookies.get('userid');
   console.log("saurabh",userid);
   const [userData,setUserData]= useState([]);
-      
+    const navigate = useNavigate();
 
   useEffect(()=>{
+    if (!userid) {
+      navigate('/login');
+    }
       axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{
           console.log("response ",res.data);
           setUserData(res.data);
