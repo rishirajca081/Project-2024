@@ -9,23 +9,11 @@ import ChatBox from '../../Component/ChatBox/ChatBox';
 import { io } from 'socket.io-client';
 import Chat_Navbar from '../../Component/Shared/Chat_Navbar';
 import { FaUser } from 'react-icons/fa';
-<<<<<<< HEAD
-//<<<<<<< HEAD
 import ConversationGroup from '../../Component/Conversation/ConversationGroup';
 import GroupChatBox from '../../Component/ChatBox/GroupChatBox';
 
-//=======
-import {BASE_URL} from '../../constant'
-//>>>>>>> 565fce3e292450974238d3d5a8e6b4dd4aad2c29
-=======
-// <<<<<<< HEAD
-import ConversationGroup from '../../Component/Conversation/ConversationGroup';
-import GroupChatBox from '../../Component/ChatBox/GroupChatBox';
-
-// =======
 import {BASE_URL} from '../../constant'
 // >>>>>>> 565fce3e292450974238d3d5a8e6b4dd4aad2c29
->>>>>>> 015be15295acdd25af43d1c1c3c005ec4f0cffc0
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -46,7 +34,7 @@ const Chat = () => {
   const [groupname,setgroupName]= useState("");
 
   useEffect(()=>{
-      axios.get(`http://localhost:4000/api/v1//user/${userid}`).then((res)=>{
+      axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{
           console.log("response ",res.data);
           setUserData(res.data);
           setgroupName(`students_${res.data.batchYear}`)
@@ -56,7 +44,7 @@ const Chat = () => {
   },[userid])
 
     useEffect(()=>{
-      axios.post(`http://localhost:4000/Chat/groupdata`,{groupname}).then((res)=>{
+      axios.post(`https://connect-hub-r42b.onrender.com/Chat/groupdata`,{groupname}).then((res)=>{
         console.log("response ",res.data);
         setgroupData(res.data);
     }).catch((err)=>{
