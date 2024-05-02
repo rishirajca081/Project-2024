@@ -131,7 +131,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
 
     return (
         <>
-    <div className="grid grid-rows-[14vh,60vh,13vh] bg-cardColor rounded-xl relative  h-screen">
+    {/* <div className="grid  bg-cardColor rounded-xl relative  h-screen"> */}
         {chat ? (
             <>
                 <div className="flex flex-col p-4 h-[600px]">
@@ -175,7 +175,7 @@ const ChatBox = ({chat,currentUser,setSendMessage,recieveMessage}) => {
         ) : (
             <span className="text-center text-gray-500">Tap on a Chat to Start Conversation...</span>
         )}
-    </div>
+    {/* </div> */}
 </>
 
     )
