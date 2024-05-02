@@ -4,11 +4,18 @@ import LogoSearch from '../../Component/LogoSearch/LogoSearch';
 import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Conversation from '../../Component/Conversation/Conversation';
+
 import ChatBox from '../../Component/ChatBox/ChatBox';
 import { io } from 'socket.io-client';
 import Chat_Navbar from '../../Component/Shared/Chat_Navbar';
 import { FaUser } from 'react-icons/fa';
+// <<<<<<< HEAD
+import ConversationGroup from '../../Component/Conversation/ConversationGroup';
+import GroupChatBox from '../../Component/ChatBox/GroupChatBox';
+
+// =======
 import {BASE_URL} from '../../constant'
+// >>>>>>> 565fce3e292450974238d3d5a8e6b4dd4aad2c29
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -16,8 +23,37 @@ const Chat = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
+
   const { userid } = useParams();
   console.log("abcc", userid);
+
+  const [isGroupChatOpen, setIsGroupChatOpen] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+
+
+  const [userData,setUserData]= useState([]);
+  const [groupData,setgroupData]= useState([]);
+  const [groupname,setgroupName]= useState("");
+
+  useEffect(()=>{
+      axios.get(`http://localhost:4000/api/v1//user/${userid}`).then((res)=>{
+          console.log("response ",res.data);
+          setUserData(res.data);
+          setgroupName(`students_${res.data.batchYear}`)
+      }).catch((err)=>{
+        console.log("error in dahboard",err.message);
+      })
+  },[userid])
+
+    useEffect(()=>{
+      axios.post(`http://localhost:4000/Chat/groupdata`,{groupname}).then((res)=>{
+        console.log("response ",res.data);
+        setgroupData(res.data);
+    }).catch((err)=>{
+      console.log("error in dahboard",err.message);
+    })
+    },[groupname])
+
 
   //sending msg to socket server
   useEffect(() => {
@@ -35,7 +71,10 @@ const Chat = () => {
     });
   }, [userid])
 
+console.log("asdasfddfd",groupData?.GroupName)
+
   //recieve msg from socket server
+
   useEffect(() => {
     socket.current.on("receiver-message", (data) => {
       setRecieveMessage(data);
@@ -51,7 +90,7 @@ const Chat = () => {
           setChats(res.data);
         })
         .catch((err) => {
-          console.log("error in dahboard", err.message);
+          console.log("error in dashboard", err.message);
         })
     getChats()
   }, [userid])
@@ -62,6 +101,18 @@ const Chat = () => {
     const online = onlineUsers.find((user) => user.userId === chatMember);
     return online ? true : false;
   }
+
+  const startGroupChat = (grpname)=>{
+    socket.current.emit("adduserToGroupchat", {grpname});
+  }
+
+// for opening the group chat
+
+  const handleGroupClick = (group) => {
+    setSelectedGroup(group);
+    setIsGroupChatOpen(true);
+  };
+  
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -85,6 +136,25 @@ const Chat = () => {
                     {checkOnlineStatus(chat) && <div className="online-dot"></div>}
                   </div>
                 ))}
+                
+              </div>
+                
+              <div className="Chat-list flex flex-col gap-4 bg-white rounded-xl mt-4 font-bold">
+                  <div
+                    key={groupData?._id}
+
+                    ////////////////////////////////////////////////////
+                    // onClick={()=>{
+                    //   startGroupChat(groupData?.GroupName)
+                    // }}
+                    onClick={() => handleGroupClick(groupData)}
+
+                    className="conversation p-2 rounded-md hover:bg-gray-300 cursor-pointer relative"
+                  >
+                    {/* <h4 >{groupData?.GroupName} </h4> */}
+                    
+                    <ConversationGroup  groupdata={groupData}   />
+                  </div>
               </div>
             </div>
           </div>
@@ -100,6 +170,18 @@ const Chat = () => {
               setSendMessage={setSendMessage}
               recieveMessage={recieveMessage}
             />
+
+            {/* Temp code */}
+            {isGroupChatOpen && (
+              <GroupChatBox
+                group={selectedGroup}
+                curruser={userData}
+                closeGroupChat={() => setIsGroupChatOpen(false)}
+              />
+            )}
+           
+          
+          
           </div>
         </div>
       </div>
