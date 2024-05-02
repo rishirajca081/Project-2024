@@ -14,6 +14,7 @@ function ClientHomepage() {
   const { state } = location;
   console.log("abc ", state);
   const [profile, setProfile] = useState([]);
+  const [filteredProfile, seFilteredProfile] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -24,6 +25,7 @@ function ClientHomepage() {
       .then((res) => {
         setProfile(res.data);
         console.log(res.data);
+        seFilteredProfile(res.data);
       }).catch((error) => {
         console.log(error);
       });
@@ -33,11 +35,13 @@ function ClientHomepage() {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
 
-
   function filterObjects(data, parameter, value) {
     return data.filter(obj => obj[parameter] === value);
 }
 
+const clerFilter = () => {
+  seFilteredProfile(profile);
+}
 
   const handleFilterChange = (event) => {
     setSelectedFilter(event.target.value);
@@ -53,16 +57,16 @@ function ClientHomepage() {
 
   const handleYearSelect = (year) => {
     setSelectedYear(year);
-   const filterData = filterObjects(profile, 'batchYear', year);
-   console.log(filterData);
-    setProfile(filterData);
+   const filteredProfile = filterObjects(profile, 'batchYear', year);
+   console.log(filteredProfile);
+    seFilteredProfile(filteredProfile);
   };
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
-    const filterData = filterObjects(profile, 'gender', gender.toLowerCase());
-   console.log(filterData);
-    setProfile(filterData);
+    const filteredProfile = filterObjects(profile, 'gender', gender.toLowerCase());
+   console.log(filteredProfile);
+   seFilteredProfile(filteredProfile);
   };
 
   // const handleProfileLogoClick = () => {
@@ -99,7 +103,7 @@ function ClientHomepage() {
       </header>
 
       {/* Main Content */}
-      <section className="container mx-auto mt-8 px-4">
+      <section className="container mx-auto mt-8 px-4 flex flex-row gap-10">
         <div className="flex flex-col sm:flex-row items-center justify-between">
           {/* Filter Dropdown */}
           <div className="relative">
@@ -120,10 +124,11 @@ function ClientHomepage() {
             </div>
           </div>
         </div>
+        <button className="bg-gray-200 px-3 py-2 rounded-md" onClick={clerFilter}>Clear Filter</button>
       </section>
 
       {/* User Profile Box */}
-      <UserPagination profiles={profile} />
+      <UserPagination profiles={filteredProfile} />
     </div>
   );
 }
