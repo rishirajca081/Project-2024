@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+const { options } = require("../routes/user");
 //to get user profile
 exports.getUserProfile = async (req, res) => {
   try {
@@ -72,5 +72,8 @@ exports.getUserById = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+
+
 
 

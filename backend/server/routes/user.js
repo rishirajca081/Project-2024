@@ -43,5 +43,6 @@ router.get("/users", userp.getAllUsers);
 router.get("/user/:userId", userp.getUserById);
 
 
+
 module.exports = router;
 

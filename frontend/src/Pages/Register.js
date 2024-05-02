@@ -204,8 +204,13 @@ const Register = ({}) => {
                    type="text"
                   id="email"
                   name="email"
+<<<<<<< HEAD
                   defaultValue={email || ''}
                   readOnly
+=======
+                  defaultValue={email || ""}
+                  // disabled
+>>>>>>> 32283f1b3299251ba081235223d73f20cede60f4
                   required
                   className="border border-black bg-gray-200 rounded-md p-2 focus:outline-none focus:border-black-500 w-full md:w-[300px] h-[40px] mt-2"
                 />
