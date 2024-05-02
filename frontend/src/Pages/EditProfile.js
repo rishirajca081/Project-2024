@@ -6,12 +6,15 @@ import { useParams } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
 import {useLocation} from 'react-router-dom';
 import axios from "axios"
+import Cookies from 'js-cookie';
 
 export default function EditProfile() {
-  const {userid}= useParams()
-  
+  // const {userid}= useParams()
   const [UserData,setUserData]= useState([]);
-
+  const storedToken = Cookies.get('user-jwt-token');
+  const userid = Cookies.get('userid');
+  console.log(userid + "from param");
+  // const state = {token: storedToken, profile : {_id: storedUserId} }
   console.log("userid editing",userid);
   useEffect(()=>{
       axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${userid}`).then((res)=>{

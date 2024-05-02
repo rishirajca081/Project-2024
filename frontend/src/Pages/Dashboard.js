@@ -5,6 +5,7 @@ import User from '../Images/User.png';
 import profilebg from '../Images/profilebg.jpg'
 import newuser from '../Images/newuser.jpg'
 import '../App.css'
+import Cookies from 'js-cookie';
 
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaCalendarAlt, FaBuilding, FaIdCard, FaVenusMars } from 'react-icons/fa';
 import {useLocation,useParams} from 'react-router-dom';
@@ -17,7 +18,8 @@ export default function Dashboard() {
   // const userData=state?.val?.profile;
 
 
-  const {userid} = useParams()
+  // const {userid} = useParams()
+  const userid = Cookies.get('userid');
   console.log("saurabh",userid);
   const [userData,setUserData]= useState([]);
       

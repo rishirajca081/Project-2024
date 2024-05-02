@@ -3,6 +3,8 @@ import { UilSearch } from '@iconscout/react-unicons';
 import Logo from '../../Images/Logo.jpg';
 import axios from 'axios';
 import { useLocation, useParams } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 const Chat_Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedUser, setSearchedUser] = useState([]);
@@ -13,6 +15,7 @@ const Chat_Navbar = () => {
 
 
   const { userid } = useParams();
+  // const userid = Cookies.get('userid');
   console.log("abcc", userid);
 
   const handleSearch=async()=>{

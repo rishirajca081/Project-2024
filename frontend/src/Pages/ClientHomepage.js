@@ -6,26 +6,40 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import UserPagination from './UserPagination';
+import Cookies from 'js-cookie';
 
 
 
 function ClientHomepage() {
   const location = useLocation();
   const { state } = location;
-  console.log("abc ", state);
-  const [profile, setProfile] = useState([]);
-  const [filteredProfile, seFilteredProfile] = useState([]);
+  console.log("abc ", state );
+  const storedToken = Cookies.get('user-jwt-token');
+  const storedUserId = Cookies.get('userid');
+  // const [token, setToken] = useState(storedToken || '');
+  // const [userId, setUserId] = useState(storedUserId || '');
+  const storedProfile = JSON.parse(localStorage.getItem('profile'));
+  const [profile, setProfile] = useState(storedProfile || []);
+  const [filteredProfile, setFilteredProfile] = useState(storedProfile || []);
+  const [token, setToken_] = useState(localStorage.getItem("user-jwt-token"));
+  const [userid, setUserId_] = useState(localStorage.getItem("userid"));
 
+ 
   useEffect(() => {
-    fetchData();
-  }, []);
+
+    
+
+    if (!storedToken || !storedUserId || !storedProfile) {
+      fetchData();
+    }
+  }, [state]);
 
   const fetchData = async () => {
     await axios.get(`https://connect-hub-r42b.onrender.com/api/v1/users`)
       .then((res) => {
         setProfile(res.data);
         console.log(res.data);
-        seFilteredProfile(res.data);
+        setFilteredProfile(res.data);
       }).catch((error) => {
         console.log(error);
       });
@@ -40,7 +54,7 @@ function ClientHomepage() {
 }
 
 const clerFilter = () => {
-  seFilteredProfile(profile);
+  setFilteredProfile(profile);
 }
 
   const handleFilterChange = (event) => {
@@ -59,14 +73,14 @@ const clerFilter = () => {
     setSelectedYear(year);
    const filteredProfile = filterObjects(profile, 'batchYear', year);
    console.log(filteredProfile);
-    seFilteredProfile(filteredProfile);
+    setFilteredProfile(filteredProfile);
   };
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
     const filteredProfile = filterObjects(profile, 'gender', gender.toLowerCase());
    console.log(filteredProfile);
-   seFilteredProfile(filteredProfile);
+   setFilteredProfile(filteredProfile);
   };
 
   // const handleProfileLogoClick = () => {
@@ -92,10 +106,10 @@ const clerFilter = () => {
               <input type="text" placeholder="Search..." className="px-4 py-2 w-48 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500" />
               <button className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2 bg-blue-500 text-white rounded-full">Search</button>
             </div>
-            <a className="" onClick={() => navigate(`/chat/${state?.profile?._id}`)}>
+            <a className="" onClick={() => navigate(`/chat/${storedUserId}`)}>
               <img src={ChatIcon} alt="Chat Icon" className="h-10" />
             </a>
-            <a href={`/dashboard/${state?.profile?._id}/user/${state?.profile?._id}`}>
+            <a href={`/dashboard/${storedUserId}/user/${storedUserId}`}>
               <img src={UserProfileLogo} alt='logo' className='h-10'/>
             </a>
           </div>

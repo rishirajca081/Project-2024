@@ -5,16 +5,22 @@ import Logo from '../Images/Logo.jpg'
 import { useLocation } from 'react-router-dom';
 import { useEffect,useState } from 'react';
 import axios from "axios"
+import Cookies from 'js-cookie';
+
 const UserDetails = () => {
   // Static user data
-  const {state}=useLocation();
+  // const {state}=useLocation();
   const [userData,setUserData]= useState([]);
+  const storedToken = Cookies.get('user-jwt-token');
+  const storedUserId = Cookies.get('userid');
+  const state = {token: storedToken, profile : {_id: storedUserId} }
+
   useEffect(()=>{
-    axios.get(`https://connect-hub-r42b.onrender.com/api/v1//user/${state.profile._id}`).then((res)=>{
+    axios.get(`http://localhost:4000/api/v1//user/${state.profile._id}`).then((res)=>{
         console.log(res.data) ;
         setUserData(res.data);
     }).catch((err)=>{
-      console.log("error in dashboard",err.message);
+      console.log("error in dahboard",err.message);
     })
   },[])
   console.log(state.profile._id);

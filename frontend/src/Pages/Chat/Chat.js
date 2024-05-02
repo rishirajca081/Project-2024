@@ -11,6 +11,7 @@ import Chat_Navbar from '../../Component/Shared/Chat_Navbar';
 import { FaUser } from 'react-icons/fa';
 import ConversationGroup from '../../Component/Conversation/ConversationGroup';
 import GroupChatBox from '../../Component/ChatBox/GroupChatBox';
+import Cookies from 'js-cookie';
 
 import {BASE_URL} from '../../constant'
 // >>>>>>> 565fce3e292450974238d3d5a8e6b4dd4aad2c29
@@ -21,7 +22,7 @@ const Chat = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
-
+  // const userid = Cookies.get('userid');
   const { userid } = useParams();
   console.log("abcc", userid);
 

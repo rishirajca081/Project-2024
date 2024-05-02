@@ -3,16 +3,16 @@ import Logo from "../Images/Logo.jpg";
 import codeimg from "../Images/logimg.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from 'js-cookie';
-
 // import { toast } from "react-toastify";
 import { useToast } from "@chakra-ui/react";
 import "react-toastify/dist/ReactToastify.css";
-
+import Cookies from 'js-cookie';
 const Login = () => {
-  const toast = useToast();
 
   const navigate = useNavigate();
+  if(Cookies.get('userId')) navigate('/clientHomePage');
+  const toast = useToast();
+
 
   const [token, setToken_] = useState(localStorage.getItem("user-jwt-token"));
   const [userid, setUserId_] = useState(localStorage.getItem("userid"));
@@ -41,7 +41,12 @@ const Login = () => {
         userData
       );
       if (response.data.success) {
-       
+        setUserId(response.data.user._id)
+        setToken(response.data.token)
+        const { token, user } = response.data;
+        Cookies.set('user-jwt-token', token, { expires: 7 }); // Store token in cookies with expiry
+        Cookies.set('userid', user._id, { expires: 7 }); 
+        console.log("hi" +response.data.user._id);
         navigate("/ClientHomepage", { state: { profile: response.data.user } });
       }
     } catch (err) {
@@ -49,7 +54,7 @@ const Login = () => {
         //toast.error("Incorrect email or password");
         toast({
           title: "Error",
-          description: "Incorrect Password",
+          description: "Incorrect Password.",
           status: "error",
           duration: 5000,
           isClosable: true,

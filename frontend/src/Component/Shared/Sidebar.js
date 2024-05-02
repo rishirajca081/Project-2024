@@ -4,15 +4,16 @@ import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '../../l
 import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames'
 import { HiOutlineLogout } from 'react-icons/hi'
+import Cookies from 'js-cookie';
 
 
 const linkClass =
     'flex items-center gap-2 font-light px-3 py-2 hover:bg-neutral-100 hover:no-underline active:bg-indigo-300 rounded-sm text-base'
 
-export default function Sidebar({userid}) {
+export default function Sidebar({userid1}) {
     const [showModal, setShowModal] = useState(false);
     const history=useNavigate();
-
+    const userid = Cookies.get('userid');
     const handleLogout = () => {
         // Show confirmation modal
 
