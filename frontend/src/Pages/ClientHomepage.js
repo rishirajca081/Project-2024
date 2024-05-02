@@ -13,6 +13,9 @@ function ClientHomepage() {
   console.log("abc ", state);
   const [profile, setProfile] = useState([]);
 
+
+  const [searchValue, setSearchValue] = useState('');
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -29,7 +32,7 @@ function ClientHomepage() {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
-
+  const [searchedUser, setSearchedUser] = useState([]);
   const handleFilterChange = (event) => {
     setSelectedFilter(event.target.value);
     setSelectedYear(""); // Reset selected year when filter changes
@@ -50,14 +53,36 @@ function ClientHomepage() {
     setSelectedGender(gender);
   };
 
-  // const handleProfileLogoClick = () => {
-  //   const userId = state?.profile?._id;
-  //   console.log("rishiraj.......",state?.profile?._id);
-  //   if (userId) {
-  //     console.log("jasgfjkhsdghfjghsdhfjsgjfgsdj",userId);
-  //     navigate(`/dashboard/${userId}/user/${userId}`);
-  //   }
+
+  // const handleSearch = () => {
+  //   console.log('Search:', searchValue);
+
+  //   
   // };
+
+
+  // You can perform additional actions here, such as making an API call with the search value
+
+   // yaha pr perfom krwana hai search wala ho gya yeh toh
+     
+  const handleSearch=async()=>{
+    try {
+      const response = await axios.get(`http://localhost:4000/Chat/?search=${searchValue}`);
+      console.log(response.data);
+      setSearchedUser(response.data);
+      
+      // Handle the response data here as needed0
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) { // Enter key
+      handleSearch();
+    }
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -69,10 +94,29 @@ function ClientHomepage() {
           </div>
           <div className="flex items-center space-x-4">
             {/* Search Input */}
-            <div className="relative flex items-center">
+            {/* <div className="relative flex items-center">
               <input type="text" placeholder="Search..." className="px-4 py-2 w-48 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500" />
               <button className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2 bg-blue-500 text-white rounded-full">Search</button>
-            </div>
+            </div> */}
+
+
+                  <div className="relative flex items-center">
+                        <input
+                          type="text"
+                          placeholder="Search..."
+                          value={searchValue}
+                          onChange={(e) => setSearchValue(e.target.value)}
+                          onKeyDown={handleKeyDown}
+                          className="px-4 py-2 w-48 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500"
+                        />
+                        <button
+                          onClick={handleSearch}
+                          className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2 bg-blue-500 text-white rounded-full"
+                        >
+                          Search
+                        </button>
+                      </div>
+
             <a className="" onClick={() => navigate(`/chat/${state?.profile?._id}`)}>
               <img src={ChatIcon} alt="Chat Icon" className="h-10" />
             </a>

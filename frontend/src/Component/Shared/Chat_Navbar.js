@@ -26,6 +26,7 @@ const Chat_Navbar = () => {
       console.error('Error fetching data:', error);
     }
   }
+  
   const setPerson=(data)=>{
     window.location.reload()
   }
