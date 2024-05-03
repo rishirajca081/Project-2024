@@ -57,8 +57,8 @@
 const io = require("socket.io")("8800", {
 
     cors: {
-       // origin: "https://project-2024-chi.vercel.app",
-       origin: "http://localhost:3000",
+        origin: "https://project-2024-chi.vercel.app",
+       //origin: "http://localhost:3000",
     }
 });
 
